@@ -34,12 +34,21 @@ PR_BODY="Cette PR ajoute une nouvelle fonctionnalité importante."
 echo "📌 Titre de la PR : $PR_TITLE"
 echo "📌 Nom de la branche : $NEW_BRANCH"
 
-# 1. Créer et pousser la nouvelle branche
 git checkout "$BASE_BRANCH"
 git pull origin "$BASE_BRANCH"
-git checkout -b "$NEW_BRANCH"
-# ⚠️ Faire les modifications nécessaires ici avant le push
+
+if git show-ref --verify --quiet refs/heads/"$NEW_BRANCH"; then
+    echo "🔄 La branche '$NEW_BRANCH' existe déjà, on y switch."
+    git checkout "$NEW_BRANCH"
+else
+    git checkout -b "$NEW_BRANCH"
+fi
+
+# Commit automatique vide pour permettre la création de la PR
+git commit --allow-empty -m "Commit automatique pour la PR"
+
 git push origin "$NEW_BRANCH"
+
 
 # 2. Créer la Pull Request via API GitHub
 response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
