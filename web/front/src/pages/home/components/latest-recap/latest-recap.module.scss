@@ -1,0 +1,12 @@
+@use '../../../../style/spacing'  as semantic;
+@use '../../../../style/spacing' as spacing;
+
+
+.latestNews{
+display:flex;
+flex-direction: column;
+align-items: center;
+justify-content: start;
+gap: spacing.$spacing-4;
+width: 100%;
+}

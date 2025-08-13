@@ -21,13 +21,13 @@ export default [
         ...globals.node,
       },
       parserOptions: {
-        ecmaVersion: 'latest', // Latest ECMAScript version
-        sourceType: 'module', // Use ES modules
+        ecmaVersion: 'latest',
+        sourceType: 'module',
         ecmaFeatures: {
-          jsx: true, // Enable JSX syntax
+          jsx: true,
         },
       },
-      parser: '@typescript-eslint/parser', // Use TypeScript parser for ESLint
+      parser: tseslint.parser, // ✅ pass the actual parser object, not a string
     },
     plugins: {
       prettier: prettierPlugin,
@@ -35,24 +35,19 @@ export default [
       'react-hooks': reactHooksPlugin,
     },
     rules: {
-      // ESLint core rules
       'no-unused-vars': 'warn',
       'no-console': 'warn',
 
-      // TypeScript-specific rules
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/explicit-function-return-type': 'off',
 
-      // React-specific rules
-      'react/react-in-jsx-scope': 'off', // Not needed for React 17+
+      'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
       'react/jsx-uses-vars': 'warn',
 
-      // React hooks rules
-      'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
-      'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
 
-      // Prettier formatting rules enforced as ESLint errors
       'prettier/prettier': [
         'error',
         {

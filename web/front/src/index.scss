@@ -1,4 +1,5 @@
 @use './style/semantic' as semantic;
+@use './style/spacing' as spacing;
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -13,4 +14,62 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+*{
+  box-sizing: border-box;
+    margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3 {
+  font-family: 'Book Antiqua', Palatino, 'Palatino Linotype', serif;
+  font-weight: normal; 
+}
+
+h1 {
+  font-size: spacing.$spacing-8;
+}
+
+h2 {
+  font-size: spacing.$spacing-6;
+}
+
+h3 {
+  font-size: spacing.$spacing-5;
+}
+
+p {
+  font-size: spacing.$spacing-4;
+}
+
+caption {
+  font-size: spacing.$spacing-3;
+}
+
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: semantic.$text-default;
+
+  &:hover {
+    color:semantic.$text-default-highlight;;
+  }
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
