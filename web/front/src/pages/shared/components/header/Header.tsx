@@ -5,7 +5,7 @@ function Header() {
   return (
     <div className={styles.headerContainer}>
       <img src={react} alt="React logo" />
-      <h1>Havite</h1>
+      <h1>HAVITE</h1>
     </div>
   )
 }
