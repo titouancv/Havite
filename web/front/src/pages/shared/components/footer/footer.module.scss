@@ -1,4 +1,5 @@
 @use '../../../../style/spacing' as spacing;
+@use '../../../../style/breakpoint' as breakpoint;
 
 .footerContainer{
     display: flex;
@@ -7,10 +8,13 @@
     align-items: center;
     justify-content: end;
     padding: spacing.$spacing-4 spacing.$spacing-4;
+
+    @media (max-width: breakpoint.$mobile) {
+        display: none;
+    }
 } 
 
 .footer{
-
     &_links {
         display: flex;
         gap: spacing.$spacing-6;

@@ -1,5 +1,6 @@
 @use '../../style/semantic' as semantic;
 @use '../../style/spacing' as spacing;
+@use '../../style/breakpoint' as breakpoint;
 
 
 .homeContainer {
@@ -10,8 +11,10 @@
     height: 100vh;
 }
 
-.home{
 
+
+
+.home{
     &Wrapper{
         display: flex;
         flex-direction: column;
@@ -34,5 +37,9 @@
         height: 100%;
         gap: spacing.$spacing-8;
         padding-inline: spacing.$spacing-4;
+
+        @media (max-width: breakpoint.$mobile) {
+            gap: spacing.$spacing-3;
+        }
     }
 }

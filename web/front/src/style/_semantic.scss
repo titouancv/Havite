@@ -1,22 +1,20 @@
 @use "./_color" as color;
 
 $background-layer-3: color.$gray-100;
-$background-layer-2:  color.$gray-200;
-$background-layer-2-hover:  color.$gray-300;
-$background-layer-3-hover:  color.$gray-200;
-$background-layer-1:  color.$gray-300;
-$background-layer-1-hover:  color.$gray-400;
-$background-inverted:  color.$gray-700;
-$background-inverted-hover:  color.$gray-600;
+$background-layer-2: color.$gray-200;
+$background-layer-2-hover: color.$gray-300;
+$background-layer-3-hover: color.$gray-200;
+$background-layer-1: color.$gray-300;
+$background-layer-1-hover: color.$gray-400;
+$background-inverted: color.$gray-700;
+$background-inverted-hover: color.$gray-600;
 $background-primary: color.$primary-300;
 $background-primary-hover: color.$primary-200;
-
 $border-layer-3: color.$gray-400;
 $border-layer-2: color.$gray-500;
 $border-layer-1: color.$gray-500;
 $border-inverted: color.$gray-600;
 $border-primary: color.$primary-400;
-
 $text-default: color.$gray-800;
 $text-default-highlight: color.$gray-900;
 $text-inverted: color.$gray-100;
