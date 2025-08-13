@@ -1,0 +1,82 @@
+@use './semantic' as semantic;
+
+@mixin component-style(
+  $layer-name: layer-1,
+  $border: false,
+  $hover: false,
+) {
+  color: semantic.$text-default;
+
+  @if $layer-name == "layer-1" {
+    background-color: semantic.$background-layer-1;
+
+    @if $border {
+      border: 1px solid semantic.$border-layer-1;
+    }
+
+    @if $hover {
+      &:hover {
+        background-color: semantic.$background-layer-1-hover;
+      }
+    }
+  }  
+
+  @if $layer-name == "layer-2" {
+    background-color: semantic.$background-layer-2;
+
+    @if $border {
+      border: 1px solid semantic.$border-layer-2;
+    }
+
+    @if $hover {
+      &:hover {
+        background-color: semantic.$background-layer-2-hover;
+      }
+    }
+  } 
+
+  @if $layer-name == "layer-3" {
+    background-color: semantic.$background-layer-3;
+
+    @if $border {
+      border: 1px solid semantic.$border-layer-3;
+    }
+
+    @if $hover {
+      &:hover {
+        background-color: semantic.$background-layer-3-hover;
+      }
+    }
+  } 
+
+  @if $layer-name == "inverted" {
+    color: semantic.$text-inverted;
+    background-color: semantic.$background-inverted;
+
+    @if $border {
+      border: 1px solid semantic.$border-inverted;
+    }
+
+    @if $hover {
+      &:hover {
+        background-color: semantic.$background-inverted-hover;
+      }
+    }
+  } 
+
+  @if $layer-name == "primary" {
+    color: semantic.$text-inverted;
+    background-color: semantic.$background-primary;
+
+    @if $border {
+      border: 1px solid semantic.$border-primary;
+    }
+
+    @if $hover {
+      &:hover {
+        background-color: semantic.$background-primary-hover;
+      }
+    }
+  } 
+
+}
