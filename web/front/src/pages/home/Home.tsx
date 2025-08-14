@@ -18,16 +18,13 @@ function Home() {
     'Recap 5',
   ]
 
-  const modalContent =
-    'Alors que l’édition 2024 était retombée dans ses travers originels concernant le nombre de réalisatrices sélectionnées dans la compétition officielle (quatre femmes sur 22 cinéastes), la compétition se révèle cette année un peu plus inclusive, malgré une présence masculine encore largement majoritaire. Sur les 22 réalisateurs en lice pour la Palme d’or, un peu moins d’un tiers sont des femmes (sept). La dernière année où aucune réalisatrice n’avait été selectionnée remonte à 2012.'
-
   return (
     <PageContainer>
       <ModalContext.Provider value={{ isModalOpen, setIsModalOpen, modalTitle, setModalTitle }}>
         <h1 className={styles.home_title}>Quoi de neuf ?</h1>
         <Latestrecap recapTitles={recapTitles} />
         <Modal title="Le recap" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <RecapView recapTitle={modalTitle} recapContent={modalContent} />
+          <RecapView recapTitle={modalTitle} />
         </Modal>
       </ModalContext.Provider>
     </PageContainer>

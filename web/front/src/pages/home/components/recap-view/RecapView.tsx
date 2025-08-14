@@ -4,15 +4,18 @@ import styles from './recap-view.module.scss'
 
 interface RecapViewProps {
   recapTitle: string
-  recapContent: string
 }
 
-const RecapView: React.FC<RecapViewProps> = ({ recapTitle, recapContent }) => {
+const RecapView: React.FC<RecapViewProps> = ({ recapTitle }) => {
   const sources = [
     { name: 'Source 1', link: 'https://youtube.com/' },
     { name: 'Source 2', link: 'https://example.com/source2' },
     { name: 'Source 3', link: 'https://example.com/source3' },
   ]
+
+  const recapContent =
+    'Alors que l’édition 2024 était retombée dans ses travers originels concernant le nombre de réalisatrices sélectionnées dans la compétition officielle (quatre femmes sur 22 cinéastes), la compétition se révèle cette année un peu plus inclusive, malgré une présence masculine encore largement majoritaire. Sur les 22 réalisateurs en lice pour la Palme d’or, un peu moins d’un tiers sont des femmes (sept). La dernière année où aucune réalisatrice n’avait été selectionnée remonte à 2012.'
+
   return (
     <div className={styles.recapView}>
       <div className={styles.content}>
