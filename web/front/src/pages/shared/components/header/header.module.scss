@@ -10,10 +10,14 @@
 }
 
 .homeButton{
-        display: flex;
+    display: flex;
     gap: spacing.$spacing-2;
     align-items: center;
     justify-content: center;
+    
+    h1{
+        font-weight: bold;
+    }
 }
 
 .logo{
