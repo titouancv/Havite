@@ -1,0 +1,27 @@
+@use '../../../../style/spacing' as spacing;
+@use '../../../../style/component'  as component;
+
+.buttonComponent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: spacing.$spacing-2 spacing.$spacing-4;
+    color: semantic.$text-default;
+    font-size: 14px;
+    background-color: semantic.$button-secondary;
+    border-radius: spacing.$spacing-1;
+
+    :hover {
+        background-color: semantic.$button-secondary-hover;
+    }
+
+    .-primary {
+        background-color: semantic.$button-primary;
+        color: semantic.$text-primary;
+
+        &:hover {
+            background-color: semantic.$button-primary-hover;
+        }
+    }
+
+}

@@ -1,0 +1,14 @@
+@use '../../../../style/spacing' as spacing;
+@use '../../../../style/component'  as component;
+
+.tagComponent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: spacing.$spacing-1 spacing.$spacing-2;
+    color: semantic.$text-inverted;
+    font-size: spacing.$spacing-3;
+    background-color: semantic.$status-info;
+    border-radius: spacing.$spacing-2;
+
+}
