@@ -1,23 +1,25 @@
-@use '../../../../style/spacing' as spacing;
-@use '../../../../style/component'  as component;
+@use '../../style/spacing' as spacing;
+@use '../../style/semantic' as semantic;
 
 .buttonComponent{
     display: flex;
     align-items: center;
     justify-content: center;
     padding: spacing.$spacing-2 spacing.$spacing-4;
-    color: semantic.$text-default;
+    color: semantic.$button-secondary-text;
     font-size: 14px;
+    font-weight: bold;;
     background-color: semantic.$button-secondary;
     border-radius: spacing.$spacing-1;
+    cursor: pointer;
 
     :hover {
         background-color: semantic.$button-secondary-hover;
     }
 
-    .-primary {
+    &.primary {
         background-color: semantic.$button-primary;
-        color: semantic.$text-primary;
+        color: semantic.$button-primary-text;
 
         &:hover {
             background-color: semantic.$button-primary-hover;

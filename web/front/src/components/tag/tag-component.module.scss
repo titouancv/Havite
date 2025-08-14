@@ -1,5 +1,5 @@
-@use '../../../../style/spacing' as spacing;
-@use '../../../../style/component'  as component;
+@use '../../style/spacing' as spacing;
+@use '../../style/semantic' as semantic;
 
 .tagComponent{
     display: flex;
@@ -9,6 +9,6 @@
     color: semantic.$text-inverted;
     font-size: spacing.$spacing-3;
     background-color: semantic.$status-info;
-    border-radius: spacing.$spacing-2;
+    border-radius: spacing.$spacing-4;
 
 }

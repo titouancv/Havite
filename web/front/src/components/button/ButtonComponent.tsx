@@ -3,12 +3,22 @@ import styles from './button-component.module.scss'
 
 interface ButtonComponentProps {
   content: string
-  isPrimary: boolean
+  isPrimary?: boolean
+  hanndleClick?: () => void
 }
 
-const ButtonComponent: React.FC<ButtonComponentProps> = ({ content, isPrimary }) => {
+const ButtonComponent: React.FC<ButtonComponentProps> = ({
+  content,
+  isPrimary = false,
+  hanndleClick,
+}) => {
   return (
-    <button className={styles.buttonComponent + isPrimary ? ' -primary' : ''}>{content}</button>
+    <div
+      className={`${styles.buttonComponent} ${isPrimary && styles.primary}`}
+      onClick={hanndleClick}
+    >
+      {content}
+    </div>
   )
 }
 

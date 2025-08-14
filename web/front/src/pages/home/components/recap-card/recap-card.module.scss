@@ -3,7 +3,7 @@
 
 
 .recapCard{
-    @include component.component-style(layer-3, false, true);
+    @include component.component-style(layer-2, false, true);
 
     display: flex;
     justify-content: start;
