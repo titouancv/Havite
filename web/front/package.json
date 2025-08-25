@@ -13,10 +13,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.85.5",
     "@tanstack/react-router": "^1.131.8",
     "@tanstack/react-router-devtools": "^1.131.8",
-    "@trpc/client": "^11.4.4",
-    "@trpc/react-query": "^11.4.4",
+    "@trpc/client": "^11.5.0",
+    "@trpc/react-query": "^11.5.0",
+    "@trpc/server": "^11.5.0",
+    "@trpc/tanstack-react-query": "^11.5.0",
     "jiti": "^2.5.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

@@ -28,6 +28,7 @@ model Recap {
 
 model Media {
   id        String   @id @default(uuid())
+  name      String   @default("")
   url       String
 
   sources   Source[]

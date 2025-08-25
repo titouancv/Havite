@@ -1,15 +1,19 @@
-import { router, publicProcedure } from "../router";
+import { prisma } from "../../db";
+import { router, publicProcedure } from "../trpc";
 import { z } from "zod";
 
 export const sourceRouter = router({
-  all: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.source.findMany({
+  all: publicProcedure
+  .query(async () => {
+    return await prisma.source.findMany({
       include: { media: true, recaps: true },
     });
   }),
 
-  byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
-    return ctx.prisma.source.findUnique({
+  byId: publicProcedure
+  .input(z.string())
+  .query(async ({ input }) => {
+    return await prisma.source.findUnique({
       where: { id: input },
       include: { media: true, recaps: true },
     });
@@ -22,8 +26,8 @@ export const sourceRouter = router({
         mediaId: z.string(),
       })
     )
-    .mutation(({ ctx, input }) => {
-      return ctx.prisma.source.create({
+    .mutation(async ({ input }) => {
+      return await prisma.source.create({
         data: {
           url: input.url,
           mediaId: input.mediaId,
