@@ -5,7 +5,9 @@ import { useQuery } from '@tanstack/react-query'
 
 export function FetchRecapById(recapOverviewId: string): Recap {
   const trpc = useTRPC()
-  const { data: recap } = useQuery(trpc.recap.byId.queryOptions(recapOverviewId))
+  const { data: recap, isLoading } = useQuery(trpc.recap.byId.queryOptions(recapOverviewId))
+  if (isLoading) return { id: '', title: 'Loading...', content: '', sources: [] }
+  if (!recap) return { id: '', title: 'No data', content: '', sources: [] }
   return recap as Recap
 }
 
