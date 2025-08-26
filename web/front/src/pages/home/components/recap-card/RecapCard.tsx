@@ -2,26 +2,31 @@ import { useContext } from 'react'
 import styles from './recap-card.module.scss'
 import { ModalContext } from '../../contexts/ModalContext'
 
-type RecapCardProps = {
+export interface RecapOverview {
+  id: string
   title: string
 }
 
-function RecapCard({ title }: RecapCardProps) {
+type RecapCardProps = {
+  recap: RecapOverview
+}
+
+function RecapCard({ recap }: RecapCardProps) {
   const context = useContext(ModalContext)
 
   if (!context) {
     return null
   }
-  const { setIsModalOpen, setModalTitle } = context
+  const { setIsModalOpen, setModalRecapOverview } = context
 
   const handleClick = () => {
     setIsModalOpen(true)
-    setModalTitle(title)
+    setModalRecapOverview({ id: recap.id, title: recap.title })
   }
 
   return (
     <div className={styles.recapCard} onClick={handleClick}>
-      <p>{title}</p>
+      <p>{recap.title}</p>
     </div>
   )
 }

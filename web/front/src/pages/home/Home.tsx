@@ -5,26 +5,23 @@ import PageContainer from '../shared/components/page-container/PageContainer'
 import Modal from '../shared/components/modal/Modal'
 import { ModalContext } from './contexts/ModalContext'
 import RecapView from './components/recap-view/RecapView'
+import { FetchAllRecapsOverview } from '../../services/recap.services'
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [modalTitle, setModalTitle] = useState('')
+  const [modalRecapOverview, setModalRecapOverview] = useState({ id: '', title: '' })
 
-  const recapTitles = [
-    'Festival de Cannes: statistiquement, quel est le portrait-robot du lauréat de la Palme d or?',
-    'Recap 2',
-    'Recap 3',
-    'Recap 4',
-    'Recap 5',
-  ]
+  const recapOverviews = FetchAllRecapsOverview()
 
   return (
     <PageContainer>
-      <ModalContext.Provider value={{ isModalOpen, setIsModalOpen, modalTitle, setModalTitle }}>
+      <ModalContext.Provider
+        value={{ isModalOpen, setIsModalOpen, modalRecapOverview, setModalRecapOverview }}
+      >
         <h1 className={styles.home_title}>Quoi de neuf ?</h1>
-        <Latestrecap recapTitles={recapTitles} />
+        <Latestrecap recapOverviews={recapOverviews} />
         <Modal title="Le recap" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <RecapView recapTitle={modalTitle} />
+          <RecapView recapOverview={modalRecapOverview} />
         </Modal>
       </ModalContext.Provider>
     </PageContainer>

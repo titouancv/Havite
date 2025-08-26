@@ -1,15 +1,15 @@
-import RecapCard from '../recap-card/RecapCard'
+import RecapCard, { type RecapOverview } from '../recap-card/RecapCard'
 import styles from './latest-recap.module.scss'
 
 interface LatestRecapProps {
-  recapTitles: string[]
+  recapOverviews: RecapOverview[]
 }
 
-const LatestRecap: React.FC<LatestRecapProps> = ({ recapTitles }) => {
+const LatestRecap: React.FC<LatestRecapProps> = ({ recapOverviews }) => {
   return (
     <div className={styles.latestNews}>
-      {recapTitles.map((title) => (
-        <RecapCard key={title} title={title} />
+      {recapOverviews.map((recapOverview) => (
+        <RecapCard key={recapOverview.id} recap={recapOverview} />
       ))}
     </div>
   )
