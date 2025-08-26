@@ -1,11 +1,11 @@
 import RecapCard, { type RecapOverview } from '../recap-card/RecapCard'
-import styles from './latest-recap.module.scss'
+import styles from './recap-card-list.module.scss'
 
-interface LatestRecapProps {
+interface RecapCardListProps {
   recapOverviews: RecapOverview[]
 }
 
-const LatestRecap: React.FC<LatestRecapProps> = ({ recapOverviews }) => {
+const RecapCardList: React.FC<RecapCardListProps> = ({ recapOverviews }) => {
   return (
     <div className={styles.latestNews}>
       {recapOverviews.map((recapOverview) => (
@@ -15,4 +15,4 @@ const LatestRecap: React.FC<LatestRecapProps> = ({ recapOverviews }) => {
   )
 }
 
-export default LatestRecap
+export default RecapCardList

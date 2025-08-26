@@ -49,7 +49,7 @@ export const recapRouter = router({
     const sourcesWithMedia = await Promise.all(
       recapById.sources.map(async (source) => {
         const media = await prisma.media.findUnique({
-          where: { id: source.id },
+          where: { id: source.mediaId },
         });
         return {
           id: source.id,

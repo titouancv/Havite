@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import styles from './home.module.scss'
-import Latestrecap from './components/latest-recap/LatestRecap'
 import PageContainer from '../shared/components/page-container/PageContainer'
 import Modal from '../shared/components/modal/Modal'
 import { ModalContext } from './contexts/ModalContext'
 import RecapView from './components/recap-view/RecapView'
 import { FetchAllRecapsOverview } from '../../services/recap.services'
+import RecapCardList from './components/recap-card-list/RecapCardList'
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -19,7 +19,7 @@ function Home() {
         value={{ isModalOpen, setIsModalOpen, modalRecapOverview, setModalRecapOverview }}
       >
         <h1 className={styles.home_title}>Quoi de neuf ?</h1>
-        <Latestrecap recapOverviews={recapOverviews} />
+        <RecapCardList recapOverviews={recapOverviews} />
         <Modal title="Le recap" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <RecapView recapOverview={modalRecapOverview} />
         </Modal>

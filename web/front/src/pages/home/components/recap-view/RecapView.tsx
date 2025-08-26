@@ -28,14 +28,14 @@ const RecapView: React.FC<RecapViewProps> = ({ recapOverview }) => {
         <div className={styles.content_header}>
           <h3>{recapOverview.title}</h3>
         </div>
-        <p>{recap?.content}</p>
+        <p>{recap.content}</p>
       </div>
       <div className={styles.actions}>
         <MessageInfoBoxComponent
           content="Article généré par l’intelligence artificielle"
           type="info"
         />
-        <Sources sources={recap?.sources} />
+        <Sources sources={recap.sources} />
       </div>
     </div>
   )
