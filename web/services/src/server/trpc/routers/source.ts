@@ -22,7 +22,7 @@ export const sourceRouter = router({
   create: publicProcedure
     .input(
       z.object({
-        url: z.string().url(),
+        url: z.string(),
         mediaId: z.string(),
       })
     )
