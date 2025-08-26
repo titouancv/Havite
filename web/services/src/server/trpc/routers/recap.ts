@@ -29,10 +29,13 @@ export const recapRouter = router({
       include: { sources: true },
     });
 
-    const recapOverviews = allRecapOverview.map((recap) => ({
+    const recapOverviews = allRecapOverview
+    .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    .slice(0, 10)
+    .map((recap) => ({
       id: recap.id,
       title: recap.title,
-    }));
+    }))
     return recapOverviews;
   }),
 
