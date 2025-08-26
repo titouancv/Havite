@@ -1,35 +1,41 @@
 import MessageInfoBoxComponent from '../../../../components/message-info-box/MessageInfoBox'
+import type { RecapOverview } from '../recap-card/RecapCard'
 import Sources from '../sources/Sources'
 import styles from './recap-view.module.scss'
+import { FetchRecapById } from '../../../../services/recap.services'
 
 interface RecapViewProps {
-  recapTitle: string
+  recapOverview: RecapOverview
 }
 
-const RecapView: React.FC<RecapViewProps> = ({ recapTitle }) => {
-  const sources = [
-    { name: 'Source 1', link: 'https://youtube.com/' },
-    { name: 'Source 2', link: 'https://example.com/source2' },
-    { name: 'Source 3', link: 'https://example.com/source3' },
-  ]
+export interface Recap {
+  id: string
+  title: string
+  content: string
+  sources: {
+    id: string
+    url: string
+    mediaName: string
+  }[]
+}
 
-  const recapContent =
-    'Alors que l’édition 2024 était retombée dans ses travers originels concernant le nombre de réalisatrices sélectionnées dans la compétition officielle (quatre femmes sur 22 cinéastes), la compétition se révèle cette année un peu plus inclusive, malgré une présence masculine encore largement majoritaire. Sur les 22 réalisateurs en lice pour la Palme d’or, un peu moins d’un tiers sont des femmes (sept). La dernière année où aucune réalisatrice n’avait été selectionnée remonte à 2012.'
+const RecapView: React.FC<RecapViewProps> = ({ recapOverview }) => {
+  const recap = FetchRecapById(recapOverview.id)
 
   return (
     <div className={styles.recapView}>
       <div className={styles.content}>
         <div className={styles.content_header}>
-          <h3>{recapTitle}</h3>
+          <h3>{recapOverview.title}</h3>
         </div>
-        <p>{recapContent}</p>
+        <p>{recap.content}</p>
       </div>
       <div className={styles.actions}>
         <MessageInfoBoxComponent
           content="Article généré par l’intelligence artificielle"
           type="info"
         />
-        <Sources sources={sources} />
+        <Sources sources={recap.sources} />
       </div>
     </div>
   )
