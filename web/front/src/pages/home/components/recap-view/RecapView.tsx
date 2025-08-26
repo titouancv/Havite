@@ -1,17 +1,26 @@
-import { useQuery } from '@tanstack/react-query'
 import MessageInfoBoxComponent from '../../../../components/message-info-box/MessageInfoBox'
 import type { RecapOverview } from '../recap-card/RecapCard'
 import Sources from '../sources/Sources'
 import styles from './recap-view.module.scss'
-import { useTRPC } from '../../../../utils/trpc'
+import { FetchRecapById } from '../../../../services/recap.services'
 
 interface RecapViewProps {
   recapOverview: RecapOverview
 }
 
+export interface Recap {
+  id: string
+  title: string
+  content: string
+  sources: {
+    id: string
+    url: string
+    mediaName: string
+  }[]
+}
+
 const RecapView: React.FC<RecapViewProps> = ({ recapOverview }) => {
-  const trpc = useTRPC()
-  const { data: recap } = useQuery(trpc.recap.byId.queryOptions(recapOverview.id))
+  const recap = FetchRecapById(recapOverview.id)
 
   return (
     <div className={styles.recapView}>
