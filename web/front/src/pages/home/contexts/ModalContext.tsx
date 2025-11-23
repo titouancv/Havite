@@ -1,5 +1,5 @@
+import type { RecapOverview } from '@/types'
 import { createContext } from 'react'
-import type { RecapOverview } from '../components/recap-card/RecapCard'
 
 export interface ModalContextType {
   isModalOpen: boolean
