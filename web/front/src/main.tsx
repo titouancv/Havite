@@ -5,9 +5,6 @@ import NotFound from './pages/not-found/NotFound'
 import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { createTRPCClient, httpBatchLink } from '@trpc/client'
-import { TRPCProvider } from './utils/trpc'
-import type { AppRouter } from '../../services/src/server'
 
 const router = createRouter({
   routeTree,
@@ -18,14 +15,6 @@ declare module '@tanstack/react-router' {
     router: typeof router
   }
 }
-
-const trpcClient = createTRPCClient<AppRouter>({
-  links: [
-    httpBatchLink({
-      url: import.meta.env.VITE_TRPC_URL || 'http://localhost:3000/api/trpc',
-    }),
-  ],
-})
 
 function makeQueryClient() {
   return new QueryClient({
@@ -59,9 +48,7 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <QueryClientProvider client={getQueryClient()}>
-        <TRPCProvider trpcClient={trpcClient} queryClient={getQueryClient()}>
-          <RouterProvider router={router} />
-        </TRPCProvider>
+        <RouterProvider router={router} />
       </QueryClientProvider>
     </StrictMode>
   )

@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {
   Cpu,
   TrendingUp,
@@ -10,15 +10,7 @@ import {
 } from 'lucide-react'
 import styles from './recap-card.module.scss'
 import { ModalContext } from '../../contexts/ModalContext'
-
-export interface RecapOverview {
-  id: string
-  title: string
-  content: string
-  imageUrl: string
-  category: string
-  readingTime: number
-}
+import type { RecapOverview } from '@/types'
 
 type RecapCardProps = {
   recap: RecapOverview
@@ -32,8 +24,24 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   Transport: Car,
 }
 
+export const testImageURL = (url: string): Promise<boolean> => {
+  return new Promise((resolve) => {
+    const img = new Image()
+    img.onload = () => resolve(true) // L'image s'est chargée correctement
+    img.onerror = () => resolve(false) // L'image n'existe pas ou l'URL est invalide
+    img.src = url
+  })
+}
+
 function RecapCard({ recap }: RecapCardProps) {
   const context = useContext(ModalContext)
+  const [isImageValid, setIsImageValid] = useState(false)
+
+  useEffect(() => {
+    testImageURL(recap.imageUrl).then((isValid) => {
+      setIsImageValid(isValid)
+    })
+  }, [recap.imageUrl])
 
   if (!context) {
     return null
@@ -48,7 +56,7 @@ function RecapCard({ recap }: RecapCardProps) {
       content: recap.content,
       imageUrl: '',
       category: recap.category,
-      readingTime: recap.readingTime,
+      createdAt: recap.createdAt,
     })
   }
 
@@ -70,11 +78,15 @@ function RecapCard({ recap }: RecapCardProps) {
         <div className={styles.header}>
           <span className={styles.categoryName}>{recap.category}</span>
           <span className={styles.dot}>·</span>
-          <span className={styles.time}>{recap.readingTime} min</span>
+          <span className={styles.time}>
+            {new Date(recap.createdAt).toLocaleDateString() +
+              ' ' +
+              new Date(recap.createdAt).toLocaleTimeString()}
+          </span>
         </div>
         <div className={styles.body}>
           <p className={styles.text}>{recap.content}</p>
-          {recap.imageUrl && (
+          {isImageValid && (
             <div className={styles.imageContainer}>
               <img src={recap.imageUrl} alt="" className={styles.image} />
             </div>

@@ -33,12 +33,12 @@
 .avatar {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    background-color: #eff3f4; // Light gray background
+    border-radius: spacing.$spacing-1;
+    background-color: semantic.$background-layer-3;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #536471; // Icon color
+    color: semantic.$text-default;
 }
 
 .contentColumn {
@@ -59,18 +59,18 @@
 
 .categoryName {
     font-weight: 700;
-    color: #0f1419;
+    color: semantic.$text-default-highlight;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .dot {
-    color: #536471;
+    color: semantic.$text-default;
 }
 
 .time {
-    color: #536471;
+    color: semantic.$text-default;
     font-weight: 400;
     white-space: nowrap;
 }
@@ -91,7 +91,7 @@
 
 .imageContainer {
     width: 40%;
-    border-radius: 16px;
+    border-radius: spacing.$spacing-1;
     overflow: hidden;
     border: 1px solid #cfd9de;
     margin-top: spacing.$spacing-2;

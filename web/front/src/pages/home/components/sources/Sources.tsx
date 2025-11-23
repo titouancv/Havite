@@ -1,14 +1,9 @@
 import Button from '@/components/button/Button'
 import styles from './sources.module.scss'
-
-interface SourcesData {
-  id: string
-  url: string
-  mediaName: string
-}
+import type { Sources as SourcesType } from '@/types'
 
 interface SourcesProps {
-  sources?: SourcesData[]
+  sources?: SourcesType[]
 }
 
 const Sources: React.FC<SourcesProps> = ({ sources = [] }) => {
@@ -21,11 +16,8 @@ const Sources: React.FC<SourcesProps> = ({ sources = [] }) => {
       <h2>Sources</h2>
       {sources.map((source, index) => (
         <div key={index} className={styles.sources_item}>
-          <p>{source.mediaName}</p>
-          <Button
-            variant="primary"
-            onClick={() => openSourceLink(source.url)}
-          >
+          <p>{source.media.name}</p>
+          <Button variant="primary" onClick={() => openSourceLink(source.url)}>
             Voir l'article
           </Button>
         </div>

@@ -6,6 +6,7 @@ import { ModalContext } from './contexts/ModalContext'
 import RecapView from './components/recap-view/RecapView'
 import { useFetchAllRecapsOverview } from '../../services/recap.services'
 import RecapCardList from './components/recap-card-list/RecapCardList'
+import type { RecapOverview } from '@/types'
 
 const CATEGORIES = ['Tous', 'Technologie', 'Finance', 'Hardware', 'Sécurité', 'Transport']
 
@@ -17,8 +18,8 @@ function Home() {
     content: '',
     imageUrl: '',
     category: '',
-    readingTime: 0,
-  })
+    createdAt: 0,
+  } as RecapOverview)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('Tous')
 
@@ -27,7 +28,7 @@ function Home() {
   const recapOverviews = data?.pages.flatMap((page) => page.items) || []
 
   const filteredRecaps = recapOverviews.filter((recap) => {
-    const matchesSearch = recap.title.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesSearch = recap.content.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesCategory = selectedCategory === 'Tous' || recap.category === selectedCategory
     return matchesSearch && matchesCategory
   })
@@ -69,7 +70,11 @@ function Home() {
             isFetchingNextPage={isFetchingNextPage}
           />
         </div>
-        <Modal title="Le recap" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <Modal
+          title={modalRecapOverview.title}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        >
           <RecapView recapOverview={modalRecapOverview} />
         </Modal>
       </ModalContext.Provider>

@@ -1,485 +1,520 @@
-export interface RecapOverview {
-  id: string
-  title: string
-  content: string
-  imageUrl: string
-  category: string
-  readingTime: number
-}
-
-export interface Recap {
-  id: string
-  title: string
-  content: string
-  imageUrl: string
-  category: string
-  readingTime: number
-  relatedQuestions: string[]
-  sources: {
-    id: string
-    url: string
-    mediaName: string
-  }[]
-}
+import type { Recap, RecapOverview } from '@/types'
 
 export const MOCK_RECAPS_DATA: Recap[] = [
   {
     id: 'recap-1',
-    title: "L'IA générative continue de transformer le paysage technologique",
-    imageUrl:
-      'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop',
-    category: 'Technologie',
-    readingTime: 4,
-    relatedQuestions: [
-      "Quels sont les impacts de l'IA sur l'emploi ?",
-      "Comment réguler l'IA générative ?",
-      'Quelles sont les alternatives open-source ?',
-    ],
-    content:
-      "L'intelligence artificielle générative ne montre aucun signe de ralentissement. De nouveaux modèles plus performants et moins énergivores émergent chaque semaine. Les géants de la tech comme les startups rivalisent d'ingéniosité pour intégrer ces technologies dans nos outils quotidiens, de la rédaction assistée à la génération de code complexe. Cependant, des questions éthiques et juridiques subsistent, notamment concernant les droits d'auteur et la désinformation.",
+    article: {
+      id: 'recap-1',
+      title: "L'IA générative continue de transformer le paysage technologique",
+      imageUrl:
+        'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop',
+      category: 'Technologie',
+      readingTime: 4,
+      contentRecap:
+        "L'intelligence artificielle générative ne montre aucun signe de ralentissement. De nouveaux modèles plus performants et moins énergivores émergent chaque semaine.",
+      content:
+        "L'intelligence artificielle générative ne montre aucun signe de ralentissement. De nouveaux modèles plus performants et moins énergivores émergent chaque semaine. Les géants de la tech comme les startups rivalisent d'ingéniosité pour intégrer ces technologies dans nos outils quotidiens.",
+      createdAt: 1732291200000,
+    },
     sources: [
       {
         id: 'source-1',
         url: 'https://lemonde.fr/pixels/article/2025/11/22/ia-generative-nouveaux-modeles',
-        mediaName: 'Le Monde',
+        media: { id: 'media-1', name: 'Le Monde', url: 'https://lemonde.fr', logoUrl: '' },
       },
       {
         id: 'source-2',
         url: 'https://techcrunch.com/2025/11/22/new-ai-startup-funding',
-        mediaName: 'TechCrunch',
+        media: { id: 'media-2', name: 'TechCrunch', url: 'https://techcrunch.com', logoUrl: '' },
       },
     ],
   },
   {
     id: 'recap-2',
-    title: 'Les investissements dans la Tech repartent à la hausse',
-    imageUrl:
-      'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1000&auto=format&fit=crop',
-    category: 'Finance',
-    readingTime: 3,
-    relatedQuestions: [
-      "Quels secteurs attirent le plus d'investissements ?",
-      "Quel est l'impact des taux d'intérêt sur la tech ?",
-    ],
-    content:
-      "Après une période de ralentissement, le capital-risque semble retrouver de l'appétit pour le secteur technologique. Les levées de fonds se multiplient, en particulier dans les domaines de l'IA, de la cybersécurité et des technologies climatiques (Climate Tech). Les analystes prévoient une année 2026 record si la tendance se maintient, portée par des taux d'intérêt qui se stabilisent.",
+    article: {
+      id: 'recap-2',
+      title: 'La transition énergétique en Europe s’accélère',
+      imageUrl:
+        'https://images.unsplash.com/photo-1581092795362-5b6f1f8b8d38?q=80&w=1000&auto=format&fit=crop',
+      category: 'Énergie',
+      readingTime: 5,
+      contentRecap:
+        "L'Europe investit massivement dans les énergies renouvelables pour atteindre ses objectifs climatiques à 2030.",
+      content:
+        'Les gouvernements européens mettent en place des politiques ambitieuses pour réduire les émissions de CO2 et favoriser l’adoption des énergies propres.',
+      createdAt: 1732377600000,
+    },
     sources: [
       {
-        id: 'source-2',
-        url: 'https://techcrunch.com/2025/11/22/new-ai-startup-funding',
-        mediaName: 'TechCrunch',
-      },
-      {
         id: 'source-3',
-        url: 'https://news.ycombinator.com/item?id=123456',
-        mediaName: 'Hacker News',
+        url: 'https://lefigaro.fr/economie/article/2025/11/22/transition-energetique',
+        media: { id: 'media-3', name: 'Le Figaro', url: 'https://lefigaro.fr', logoUrl: '' },
       },
     ],
   },
   {
     id: 'recap-3',
-    title: 'Réalité Mixte : Le nouveau standard ?',
-    imageUrl:
-      'https://images.unsplash.com/photo-1622979135228-d0a136c145ec?q=80&w=1000&auto=format&fit=crop',
-    category: 'Hardware',
-    readingTime: 5,
-    relatedQuestions: [
-      'La réalité mixte va-t-elle remplacer les smartphones ?',
-      'Quels sont les risques pour la santé ?',
-    ],
-    content:
-      "Les derniers casques de réalité mixte arrivent sur le marché avec la promesse de remplacer nos écrans traditionnels. Plus légers, plus autonomes et dotés d'une résolution impressionnante, ils séduisent autant les professionnels que le grand public. Les applications de productivité spatiale se développent, laissant entrevoir un futur où le bureau physique pourrait devenir obsolète.",
+    article: {
+      id: 'recap-3',
+      title: 'L’impression 3D révolutionne l’industrie automobile',
+      imageUrl:
+        'https://images.unsplash.com/photo-1600071099124-1ef2f6924c63?q=80&w=1000&auto=format&fit=crop',
+      category: 'Industrie',
+      readingTime: 3,
+      contentRecap:
+        'Les constructeurs automobiles utilisent l’impression 3D pour produire des pièces plus rapidement et à moindre coût.',
+      content:
+        'Grâce à l’impression 3D, les entreprises automobiles peuvent fabriquer des prototypes et des pièces sur mesure avec une grande précision.',
+      createdAt: 1732464000000,
+    },
     sources: [
       {
         id: 'source-4',
-        url: 'https://theverge.com/2025/11/22/apple-vr-headset-review',
-        mediaName: 'The Verge',
+        url: 'https://industrie-tech.com/3d-printing-cars',
+        media: {
+          id: 'media-4',
+          name: 'Industrie Tech',
+          url: 'https://industrie-tech.com',
+          logoUrl: '',
+        },
       },
     ],
   },
   {
     id: 'recap-4',
-    title: 'Cybersécurité : Les nouvelles menaces de 2025',
-    imageUrl:
-      'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1000&auto=format&fit=crop',
-    category: 'Sécurité',
-    readingTime: 6,
-    relatedQuestions: [
-      'Comment se protéger du phishing par IA ?',
-      "Qu'est-ce que l'architecture Zero Trust ?",
-    ],
-    content:
-      "Avec la sophistication croissante des attaques, la cybersécurité devient un enjeu majeur pour toutes les entreprises. Le phishing assisté par IA et les attaques sur la chaîne d'approvisionnement logicielle sont en hausse. Les experts recommandent l'adoption généralisée de l'architecture Zero Trust et l'authentification sans mot de passe pour contrer ces risques.",
+    article: {
+      id: 'recap-4',
+      title: 'L’économie mondiale face à la montée de l’inflation',
+      imageUrl:
+        'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=1000&auto=format&fit=crop',
+      category: 'Économie',
+      readingTime: 4,
+      contentRecap:
+        'Les banques centrales ajustent leurs politiques pour limiter l’inflation et stabiliser les marchés.',
+      content:
+        'Avec l’inflation persistante, les investisseurs et gouvernements cherchent à adapter leurs stratégies financières afin de protéger l’économie mondiale.',
+      createdAt: 1732550400000,
+    },
     sources: [
       {
-        id: 'source-3',
-        url: 'https://news.ycombinator.com/item?id=123456',
-        mediaName: 'Hacker News',
+        id: 'source-5',
+        url: 'https://finance.yahoo.com/world-economy-inflation',
+        media: {
+          id: 'media-5',
+          name: 'Yahoo Finance',
+          url: 'https://finance.yahoo.com',
+          logoUrl: '',
+        },
       },
     ],
   },
   {
     id: 'recap-5',
-    title: "L'essor des véhicules autonomes en milieu urbain",
-    imageUrl:
-      'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=1000&auto=format&fit=crop',
-    category: 'Transport',
-    readingTime: 4,
-    relatedQuestions: ['Les véhicules autonomes sont-ils sûrs ?', "Quel impact sur l'urbanisme ?"],
-    content:
-      "Plusieurs villes pilotes testent désormais des flottes de taxis entièrement autonomes. Les résultats préliminaires montrent une réduction des accidents et une fluidification du trafic. Toutefois, l'acceptation sociale et l'adaptation des infrastructures restent des défis majeurs à relever avant un déploiement à grande échelle.",
+    article: {
+      id: 'recap-5',
+      title: 'Nouvelles découvertes dans l’exploration spatiale',
+      imageUrl:
+        'https://images.unsplash.com/photo-1581093455648-23b05f76a6a2?q=80&w=1000&auto=format&fit=crop',
+      category: 'Science',
+      readingTime: 5,
+      contentRecap:
+        'Les agences spatiales dévoilent des découvertes majeures sur les exoplanètes et les possibilités de vie extraterrestre.',
+      content:
+        'Les télescopes et missions spatiales récentes permettent d’explorer des planètes lointaines et de mieux comprendre la formation de notre univers.',
+      createdAt: 1732636800000,
+    },
     sources: [
       {
-        id: 'source-1',
-        url: 'https://lemonde.fr/pixels/article/2025/11/22/ia-generative-nouveaux-modeles',
-        mediaName: 'Le Monde',
-      },
-      {
-        id: 'source-4',
-        url: 'https://theverge.com/2025/11/22/apple-vr-headset-review',
-        mediaName: 'The Verge',
+        id: 'source-6',
+        url: 'https://space.com/exoplanet-discoveries',
+        media: { id: 'media-6', name: 'Space.com', url: 'https://space.com', logoUrl: '' },
       },
     ],
   },
   {
     id: 'recap-6',
-    title: "L'informatique quantique : une révolution imminente ?",
-    imageUrl:
-      'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1000&auto=format&fit=crop',
-    category: 'Technologie',
-    readingTime: 5,
-    relatedQuestions: [
-      'Quand aurons-nous des ordinateurs quantiques personnels ?',
-      'Quel impact sur la cryptographie ?',
+    article: {
+      id: 'recap-6',
+      title: 'La santé mentale au travail devient une priorité',
+      imageUrl:
+        'https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=1000&auto=format&fit=crop',
+      category: 'Santé',
+      readingTime: 3,
+      contentRecap:
+        'De plus en plus d’entreprises mettent en place des programmes de soutien à la santé mentale de leurs employés.',
+      content:
+        'Le bien-être au travail est désormais considéré comme un levier essentiel de productivité et de rétention des talents.',
+      createdAt: 1732723200000,
+    },
+    sources: [
+      {
+        id: 'source-7',
+        url: 'https://santemagazine.fr/mental-workplace',
+        media: {
+          id: 'media-7',
+          name: 'Santé Magazine',
+          url: 'https://santemagazine.fr',
+          logoUrl: '',
+        },
+      },
     ],
-    content:
-      'Les progrès récents dans la stabilisation des qubits laissent présager une arrivée plus rapide que prévu des ordinateurs quantiques commerciaux. Google et IBM annoncent des feuilles de route ambitieuses.',
-    sources: [{ id: 'source-6', url: 'https://nature.com', mediaName: 'Nature' }],
   },
   {
     id: 'recap-7',
-    title: "L'hydrogène vert : le futur de la mobilité lourde",
-    imageUrl:
-      'https://images.unsplash.com/photo-1592833159155-c62df1b65634?q=80&w=1000&auto=format&fit=crop',
-    category: 'Transport',
-    readingTime: 4,
-    relatedQuestions: [
-      "L'hydrogène est-il vraiment écologique ?",
-      "Quel coût face à l'électrique ?",
+    article: {
+      id: 'recap-7',
+      title: 'Les villes intelligentes transforment la mobilité urbaine',
+      imageUrl:
+        'https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1000&auto=format&fit=crop',
+      category: 'Urbanisme',
+      readingTime: 4,
+      contentRecap:
+        'L’IoT et les données massives permettent d’optimiser le trafic et l’éclairage public dans les villes intelligentes.',
+      content:
+        'Grâce aux technologies connectées, les villes peuvent améliorer la qualité de vie des citoyens tout en réduisant leur empreinte écologique.',
+      createdAt: 1732809600000,
+    },
+    sources: [
+      {
+        id: 'source-8',
+        url: 'https://smartcitiesworld.net/news',
+        media: {
+          id: 'media-8',
+          name: 'Smart Cities World',
+          url: 'https://smartcitiesworld.net',
+          logoUrl: '',
+        },
+      },
     ],
-    content:
-      "Alors que les batteries dominent pour les voitures, l'hydrogène s'impose pour les camions, trains et navires, offrant une autonomie et une rapidité de recharge supérieures.",
-    sources: [{ id: 'source-7', url: 'https://iea.org', mediaName: 'IEA' }],
   },
   {
     id: 'recap-8',
-    title: 'Tourisme spatial : bientôt accessible ?',
-    imageUrl:
-      'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1000&auto=format&fit=crop',
-    category: 'Technologie',
-    readingTime: 6,
-    relatedQuestions: ["Quel est le prix d'un billet ?", 'Quel impact environnemental ?'],
-    content:
-      "SpaceX et Blue Origin multiplient les vols d'essai. Si le ticket reste cher, les coûts baissent rapidement, ouvrant la voie à un tourisme orbital pour les plus fortunés d'ici 2030.",
-    sources: [{ id: 'source-8', url: 'https://space.com', mediaName: 'Space.com' }],
+    article: {
+      id: 'recap-8',
+      title: 'L’économie circulaire gagne du terrain',
+      imageUrl:
+        'https://images.unsplash.com/photo-1596495577886-d920f1f3b6de?q=80&w=1000&auto=format&fit=crop',
+      category: 'Économie',
+      readingTime: 3,
+      contentRecap:
+        'De plus en plus d’entreprises adoptent le recyclage et la réutilisation pour réduire leur impact environnemental.',
+      content:
+        'L’économie circulaire devient un modèle incontournable pour répondre aux enjeux environnementaux et économiques actuels.',
+      createdAt: 1732896000000,
+    },
+    sources: [
+      {
+        id: 'source-9',
+        url: 'https://economictimes.indiatimes.com/circular-economy',
+        media: {
+          id: 'media-9',
+          name: 'Economic Times',
+          url: 'https://economictimes.indiatimes.com',
+          logoUrl: '',
+        },
+      },
+    ],
   },
   {
     id: 'recap-9',
-    title: 'La fin du cash : vers une société sans argent liquide',
-    imageUrl:
-      'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000&auto=format&fit=crop',
-    category: 'Finance',
-    readingTime: 3,
-    relatedQuestions: [
-      'Quels risques pour la vie privée ?',
-      'Quid des personnes non bancarisées ?',
+    article: {
+      id: 'recap-9',
+      title: 'Les tendances du e-commerce pour 2025',
+      imageUrl:
+        'https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1000&auto=format&fit=crop',
+      category: 'Commerce',
+      readingTime: 4,
+      contentRecap:
+        'Le e-commerce continue d’évoluer avec des solutions de paiement innovantes et une personnalisation accrue.',
+      content:
+        'Les marques investissent dans l’expérience client et l’intelligence artificielle pour améliorer leurs ventes en ligne.',
+      createdAt: 1732982400000,
+    },
+    sources: [
+      {
+        id: 'source-10',
+        url: 'https://forbes.com/ecommerce-trends-2025',
+        media: { id: 'media-10', name: 'Forbes', url: 'https://forbes.com', logoUrl: '' },
+      },
     ],
-    content:
-      'Les paiements numériques dépassent désormais les espèces dans la majorité des transactions. Les gouvernements encouragent cette transition pour lutter contre la fraude fiscale.',
-    sources: [{ id: 'source-9', url: 'https://ft.com', mediaName: 'Financial Times' }],
   },
   {
     id: 'recap-10',
-    title: 'Sécurité des objets connectés : un défi majeur',
-    imageUrl:
-      'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=1000&auto=format&fit=crop',
-    category: 'Sécurité',
-    readingTime: 4,
-    relatedQuestions: [
-      'Comment sécuriser sa maison connectée ?',
-      'Les fabricants sont-ils responsables ?',
+    article: {
+      id: 'recap-10',
+      title: 'La mode durable séduit de plus en plus de consommateurs',
+      imageUrl:
+        'https://images.unsplash.com/photo-1521334884684-d80222895322?q=80&w=1000&auto=format&fit=crop',
+      category: 'Culture',
+      readingTime: 3,
+      contentRecap:
+        'Les marques adoptent des pratiques écoresponsables pour répondre à la demande croissante de mode durable.',
+      content:
+        'Recyclage des matériaux, production locale et transparence deviennent les maîtres-mots de l’industrie de la mode en 2025.',
+      createdAt: 1733068800000,
+    },
+    sources: [
+      {
+        id: 'source-11',
+        url: 'https://vogue.fr/sustainable-fashion',
+        media: { id: 'media-11', name: 'Vogue', url: 'https://vogue.fr', logoUrl: '' },
+      },
     ],
-    content:
-      "Avec des milliards d'objets connectés, la surface d'attaque explose. De nouvelles normes européennes imposent désormais des standards de sécurité plus stricts aux fabricants.",
-    sources: [{ id: 'source-10', url: 'https://wired.com', mediaName: 'Wired' }],
   },
   {
     id: 'recap-11',
-    title: "L'aviation électrique décolle enfin",
-    imageUrl:
-      'https://images.unsplash.com/photo-1559087867-ce4c91325525?q=80&w=1000&auto=format&fit=crop',
-    category: 'Transport',
-    readingTime: 5,
-    relatedQuestions: [
-      'Quelle autonomie pour les avions électriques ?',
-      'Quand pourrons-nous voler vert ?',
+    article: {
+      id: 'recap-11',
+      title: 'Le football féminin continue de se professionnaliser',
+      imageUrl:
+        'https://images.unsplash.com/photo-1604335399106-76a7f2e1c6a0?q=80&w=1000&auto=format&fit=crop',
+      category: 'Sport',
+      readingTime: 4,
+      contentRecap:
+        'Les championnats féminins attirent de plus en plus de spectateurs et d’investissements.',
+      content:
+        'Les clubs mettent en place des infrastructures et des programmes pour soutenir le développement du football féminin.',
+      createdAt: 1733155200000,
+    },
+    sources: [
+      {
+        id: 'source-12',
+        url: 'https://fifa.com/womens-football',
+        media: { id: 'media-12', name: 'FIFA', url: 'https://fifa.com', logoUrl: '' },
+      },
     ],
-    content:
-      "Les premiers vols commerciaux court-courriers en électrique sont prévus pour 2026. Les batteries solides promettent de doubler l'autonomie actuelle.",
-    sources: [{ id: 'source-11', url: 'https://aviationweek.com', mediaName: 'Aviation Week' }],
   },
   {
     id: 'recap-12',
-    title: "La 6G : à quoi s'attendre ?",
-    imageUrl:
-      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop',
-    category: 'Technologie',
-    readingTime: 4,
-    relatedQuestions: ['Quelle différence avec la 5G ?', 'Quels usages révolutionnaires ?'],
-    content:
-      "Alors que la 5G se déploie, les chercheurs travaillent déjà sur la 6G, promettant des débits 100 fois supérieurs et une latence quasi nulle, permettant l'internet des sens.",
-    sources: [{ id: 'source-12', url: 'https://ieee.org', mediaName: 'IEEE Spectrum' }],
+    article: {
+      id: 'recap-12',
+      title: 'Les crypto-monnaies face à la régulation',
+      imageUrl:
+        'https://images.unsplash.com/photo-1614680376988-7d05d5d44d18?q=80&w=1000&auto=format&fit=crop',
+      category: 'Finance',
+      readingTime: 5,
+      contentRecap:
+        'Les gouvernements mettent en place des régulations pour sécuriser les transactions en crypto-monnaies.',
+      content:
+        'Face à la volatilité des cryptos, la régulation vise à protéger les investisseurs tout en favorisant l’innovation financière.',
+      createdAt: 1733241600000,
+    },
+    sources: [
+      {
+        id: 'source-13',
+        url: 'https://coindesk.com/regulation-crypto',
+        media: { id: 'media-13', name: 'CoinDesk', url: 'https://coindesk.com', logoUrl: '' },
+      },
+    ],
   },
   {
     id: 'recap-13',
-    title: 'Blockchain et traçabilité alimentaire',
-    imageUrl:
-      'https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?q=80&w=1000&auto=format&fit=crop',
-    category: 'Technologie',
-    readingTime: 3,
-    relatedQuestions: [
-      "Comment vérifier l'origine de ses produits ?",
-      'La blockchain est-elle infalsifiable ?',
+    article: {
+      id: 'recap-13',
+      title: 'Les océans menacés par la pollution plastique',
+      imageUrl:
+        'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000&auto=format&fit=crop',
+      category: 'Environnement',
+      readingTime: 4,
+      contentRecap:
+        'Chaque année, des millions de tonnes de plastique polluent les océans, menaçant la faune marine.',
+      content:
+        'Des initiatives de nettoyage et des politiques de réduction des plastiques à usage unique se multiplient pour protéger les océans.',
+      createdAt: 1733328000000,
+    },
+    sources: [
+      {
+        id: 'source-14',
+        url: 'https://wwf.fr/oceans-pollution-plastique',
+        media: { id: 'media-14', name: 'WWF', url: 'https://wwf.fr', logoUrl: '' },
+      },
     ],
-    content:
-      "De la ferme à l'assiette, la blockchain permet de suivre chaque étape de la production alimentaire, garantissant la qualité et l'éthique des produits consommés.",
-    sources: [{ id: 'source-13', url: 'https://forbes.com', mediaName: 'Forbes' }],
   },
   {
     id: 'recap-14',
-    title: "Smart Cities : l'urbanisme connecté",
-    imageUrl:
-      'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=1000&auto=format&fit=crop',
-    category: 'Transport',
-    readingTime: 5,
-    relatedQuestions: ['Quels bénéfices pour les citoyens ?', 'Quid de la surveillance ?'],
-    content:
-      "Les villes intelligentes utilisent l'IoT pour optimiser le trafic, la gestion des déchets et l'énergie. Singapour et Copenhague montrent la voie.",
+    article: {
+      id: 'recap-14',
+      title: 'Les robots chirurgiens révolutionnent la médecine',
+      imageUrl:
+        'https://images.unsplash.com/photo-1580281657523-cd92c0b6f064?q=80&w=1000&auto=format&fit=crop',
+      category: 'Santé',
+      readingTime: 3,
+      contentRecap:
+        'La chirurgie assistée par robot permet des opérations plus précises et moins invasives.',
+      content:
+        'Les robots chirurgiens améliorent les résultats pour les patients et réduisent les risques opératoires.',
+      createdAt: 1733414400000,
+    },
     sources: [
-      { id: 'source-14', url: 'https://smartcitiesworld.net', mediaName: 'SmartCitiesWorld' },
+      {
+        id: 'source-15',
+        url: 'https://medicalxpress.com/robotic-surgery',
+        media: {
+          id: 'media-15',
+          name: 'Medical Xpress',
+          url: 'https://medicalxpress.com',
+          logoUrl: '',
+        },
+      },
     ],
   },
   {
     id: 'recap-15',
-    title: "L'authentification biométrique se généralise",
-    imageUrl:
-      'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1000&auto=format&fit=crop',
-    category: 'Sécurité',
-    readingTime: 3,
-    relatedQuestions: ['Est-ce vraiment sûr ?', 'Peut-on voler nos données biométriques ?'],
-    content:
-      'Fini les mots de passe ? La reconnaissance faciale et les empreintes digitales deviennent la norme pour sécuriser nos accès, mais soulèvent des questions de vie privée.',
-    sources: [{ id: 'source-15', url: 'https://cnet.com', mediaName: 'CNET' }],
+    article: {
+      id: 'recap-15',
+      title: 'Les podcasts éducatifs connaissent un essor inédit',
+      imageUrl:
+        'https://images.unsplash.com/photo-1581276879432-15a2f5c3c9ab?q=80&w=1000&auto=format&fit=crop',
+      category: 'Culture',
+      readingTime: 2,
+      contentRecap:
+        'Les podcasts éducatifs attirent de plus en plus d’auditeurs grâce à des contenus spécialisés et accessibles.',
+      content:
+        'Universités, journalistes et experts partagent leurs connaissances via des podcasts, renforçant l’apprentissage informel.',
+      createdAt: 1733500800000,
+    },
+    sources: [
+      {
+        id: 'source-16',
+        url: 'https://podnews.net/educational-podcasts',
+        media: { id: 'media-16', name: 'Podnews', url: 'https://podnews.net', logoUrl: '' },
+      },
+    ],
   },
   {
     id: 'recap-16',
-    title: 'Santé connectée : les montres qui sauvent des vies',
-    imageUrl:
-      'https://images.unsplash.com/photo-1576243345690-8e4b728a3fa3?q=80&w=1000&auto=format&fit=crop',
-    category: 'Hardware',
-    readingTime: 4,
-    relatedQuestions: ['Quelle fiabilité médicale ?', 'Les données sont-elles partagées ?'],
-    content:
-      "Les dernières montres connectées détectent l'apnée du sommeil, l'arythmie et même le diabète. Elles deviennent de véritables assistants médicaux personnels.",
-    sources: [{ id: 'source-16', url: 'https://healthline.com', mediaName: 'Healthline' }],
+    article: {
+      id: 'recap-16',
+      title: 'L’intelligence artificielle dans le cinéma',
+      imageUrl:
+        'https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=1000&auto=format&fit=crop',
+      category: 'Culture',
+      readingTime: 3,
+      contentRecap:
+        'Des studios explorent l’IA pour générer des effets visuels et scénarios dans le cinéma moderne.',
+      content:
+        'L’IA permet de créer des animations et des environnements virtuels plus immersifs et moins coûteux.',
+      createdAt: 1733587200000,
+    },
+    sources: [
+      {
+        id: 'source-17',
+        url: 'https://variety.com/ai-cinema-trends',
+        media: { id: 'media-17', name: 'Variety', url: 'https://variety.com', logoUrl: '' },
+      },
+    ],
   },
   {
     id: 'recap-17',
-    title: 'Smartphones pliables : gadget ou futur ?',
-    imageUrl:
-      'https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=1000&auto=format&fit=crop',
-    category: 'Hardware',
-    readingTime: 3,
-    relatedQuestions: ['Sont-ils fragiles ?', 'Le prix va-t-il baisser ?'],
-    content:
-      'Les ventes de smartphones pliables doublent chaque année. La technologie mûrit, les prix baissent, et les usages se diversifient pour le multitâche.',
-    sources: [{ id: 'source-17', url: 'https://engadget.com', mediaName: 'Engadget' }],
+    article: {
+      id: 'recap-17',
+      title: 'Le télétravail redéfinit le monde professionnel',
+      imageUrl:
+        'https://images.unsplash.com/photo-1587613865769-0cc91c1a9b5c?q=80&w=1000&auto=format&fit=crop',
+      category: 'Travail',
+      readingTime: 4,
+      contentRecap:
+        'Le télétravail se pérennise, obligeant les entreprises à repenser leurs méthodes de management et d’organisation.',
+      content:
+        'De nouvelles technologies et outils collaboratifs facilitent le travail à distance et l’équilibre vie pro-vie perso.',
+      createdAt: 1733673600000,
+    },
+    sources: [
+      {
+        id: 'source-18',
+        url: 'https://hbr.org/telework-future',
+        media: {
+          id: 'media-18',
+          name: 'Harvard Business Review',
+          url: 'https://hbr.org',
+          logoUrl: '',
+        },
+      },
+    ],
   },
   {
     id: 'recap-18',
-    title: 'Régulation des crypto-monnaies en Europe',
-    imageUrl:
-      'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1000&auto=format&fit=crop',
-    category: 'Finance',
-    readingTime: 5,
-    relatedQuestions: ["Qu'est-ce que MiCA ?", "La fin de l'anonymat ?"],
-    content:
-      "Le règlement MiCA entre en vigueur, apportant un cadre clair pour les acteurs crypto. L'objectif : protéger les investisseurs sans étouffer l'innovation.",
-    sources: [{ id: 'source-18', url: 'https://coindesk.com', mediaName: 'CoinDesk' }],
+    article: {
+      id: 'recap-18',
+      title: 'Les jeux vidéo comme outil pédagogique',
+      imageUrl:
+        'https://images.unsplash.com/photo-1606813906726-d6aa026d404d?q=80&w=1000&auto=format&fit=crop',
+      category: 'Éducation',
+      readingTime: 3,
+      contentRecap:
+        'Les jeux vidéo éducatifs sont de plus en plus utilisés pour favoriser l’apprentissage interactif et ludique.',
+      content:
+        'Des écoles et universités intègrent des serious games pour stimuler la créativité et la réflexion des étudiants.',
+      createdAt: 1733760000000,
+    },
+    sources: [
+      {
+        id: 'source-19',
+        url: 'https://edutopia.org/video-games-learning',
+        media: { id: 'media-19', name: 'Edutopia', url: 'https://edutopia.org', logoUrl: '' },
+      },
+    ],
   },
   {
     id: 'recap-19',
-    title: 'Le transport maritime autonome',
-    imageUrl:
-      'https://images.unsplash.com/photo-1554254617-995461d98754?q=80&w=1000&auto=format&fit=crop',
-    category: 'Transport',
-    readingTime: 4,
-    relatedQuestions: ['Quels risques de piratage ?', "Quel impact sur l'emploi des marins ?"],
-    content:
-      "Des cargos sans équipage traversent déjà les océans. L'IA optimise les routes et réduit la consommation de carburant, transformant la logistique mondiale.",
+    article: {
+      id: 'recap-19',
+      title: 'Les véhicules électriques gagnent du terrain',
+      imageUrl:
+        'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1000&auto=format&fit=crop',
+      category: 'Transport',
+      readingTime: 4,
+      contentRecap:
+        'Les ventes de véhicules électriques augmentent grâce à des incitations gouvernementales et une infrastructure de recharge en expansion.',
+      content:
+        'Les constructeurs automobiles investissent massivement dans les véhicules propres pour répondre à la demande croissante des consommateurs.',
+      createdAt: 1733846400000,
+    },
     sources: [
-      { id: 'source-19', url: 'https://maritime-executive.com', mediaName: 'Maritime Executive' },
+      {
+        id: 'source-20',
+        url: 'https://electrek.co/electric-vehicles-market-growth',
+        media: { id: 'media-20', name: 'Electrek', url: 'https://electrek.co', logoUrl: '' },
+      },
     ],
   },
   {
     id: 'recap-20',
-    title: "L'IA au service de la médecine de précision",
-    imageUrl:
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop',
-    category: 'Technologie',
-    readingTime: 6,
-    relatedQuestions: [
-      "L'IA va-t-elle remplacer les médecins ?",
-      'Comment sont entraînées ces IA ?',
-    ],
-    content:
-      "L'IA analyse des millions de données patients pour proposer des traitements sur mesure. Les taux de réussite en oncologie s'améliorent grâce à ces diagnostics assistés.",
-    sources: [{ id: 'source-20', url: 'https://thelancet.com', mediaName: 'The Lancet' }],
-  },
-  {
-    id: 'recap-21',
-    title: 'Cloud Gaming : la fin des consoles ?',
-    imageUrl:
-      'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=1000&auto=format&fit=crop',
-    category: 'Technologie',
-    readingTime: 4,
-    relatedQuestions: ['Faut-il une connexion fibre ?', 'Quel abonnement choisir ?'],
-    content:
-      'Avec le Xbox Cloud Gaming et GeForce Now, jouer en 4K sans console devient réalité. Le marché du hardware gaming pourrait se transformer radicalement.',
-    sources: [{ id: 'source-21', url: 'https://polygon.com', mediaName: 'Polygon' }],
-  },
-  {
-    id: 'recap-22',
-    title: 'Pénurie de semi-conducteurs : la crise persiste',
-    imageUrl:
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop',
-    category: 'Hardware',
-    readingTime: 5,
-    relatedQuestions: [
-      'Quand la situation reviendra-t-elle à la normale ?',
-      'Pourquoi cette pénurie ?',
-    ],
-    content:
-      "La demande explose avec l'IA et les VE, mais l'offre peine à suivre. L'Europe et les USA investissent massivement pour relocaliser la production de puces.",
-    sources: [{ id: 'source-22', url: 'https://bloomberg.com', mediaName: 'Bloomberg' }],
-  },
-  {
-    id: 'recap-23',
-    title: 'Ransomwares : des attaques de plus en plus ciblées',
-    imageUrl:
-      'https://images.unsplash.com/photo-1563206767-5b1d972d9fb7?q=80&w=1000&auto=format&fit=crop',
-    category: 'Sécurité',
-    readingTime: 4,
-    relatedQuestions: ['Faut-il payer la rançon ?', 'Comment se protéger ?'],
-    content:
-      "Les groupes de hackers visent désormais les hôpitaux et les infrastructures critiques. La coopération internationale s'intensifie pour démanteler ces réseaux.",
+    article: {
+      id: 'recap-20',
+      title: 'La blockchain au service de la traçabilité alimentaire',
+      imageUrl:
+        'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=1000&auto=format&fit=crop',
+      category: 'Technologie',
+      readingTime: 3,
+      contentRecap:
+        'La blockchain est utilisée pour assurer la transparence et la traçabilité dans l’industrie alimentaire.',
+      content:
+        'Les consommateurs peuvent désormais vérifier l’origine et la qualité des produits grâce aux registres numériques sécurisés.',
+      createdAt: 1733932800000,
+    },
     sources: [
-      { id: 'source-23', url: 'https://krebsonsecurity.com', mediaName: 'Krebs on Security' },
+      {
+        id: 'source-21',
+        url: 'https://foodtechconnect.com/blockchain-food-traceability',
+        media: {
+          id: 'media-21',
+          name: 'FoodTech Connect',
+          url: 'https://foodtechconnect.com',
+          logoUrl: '',
+        },
+      },
     ],
-  },
-  {
-    id: 'recap-24',
-    title: 'Les monnaies numériques de banque centrale (MNBC)',
-    imageUrl:
-      'https://images.unsplash.com/photo-1621416894569-0f39ed31d247?q=80&w=1000&auto=format&fit=crop',
-    category: 'Finance',
-    readingTime: 5,
-    relatedQuestions: ['Quelle différence avec le Bitcoin ?', "L'Euro numérique arrive quand ?"],
-    content:
-      "L'Euro numérique est en phase de test. Il promet des paiements instantanés et sécurisés, mais suscite des inquiétudes sur la traçabilité des transactions.",
-    sources: [{ id: 'source-24', url: 'https://ecb.europa.eu', mediaName: 'ECB' }],
-  },
-  {
-    id: 'recap-25',
-    title: 'Hyperloop : où en est le projet ?',
-    imageUrl:
-      'https://images.unsplash.com/photo-1535535112387-56ffe8db21ff?q=80&w=1000&auto=format&fit=crop',
-    category: 'Transport',
-    readingTime: 4,
-    relatedQuestions: ['Est-ce réalisable techniquement ?', 'Quel prix pour un billet ?'],
-    content:
-      'Malgré des défis techniques, plusieurs lignes de test sont opérationnelles en Asie. Le rêve de voyager à 1000 km/h au sol se rapproche.',
-    sources: [{ id: 'source-25', url: 'https://wired.com', mediaName: 'Wired' }],
-  },
-  {
-    id: 'recap-26',
-    title: "La réalité virtuelle dans l'éducation",
-    imageUrl:
-      'https://images.unsplash.com/photo-1592478411213-61535fdd861d?q=80&w=1000&auto=format&fit=crop',
-    category: 'Hardware',
-    readingTime: 5,
-    relatedQuestions: ['Est-ce efficace pour apprendre ?', 'Quel équipement pour les écoles ?'],
-    content:
-      "Visiter la Rome antique ou opérer un patient virtuel : la VR transforme l'apprentissage. Les études montrent une meilleure rétention de l'information.",
-    sources: [{ id: 'source-26', url: 'https://edtechmagazine.com', mediaName: 'EdTech Magazine' }],
-  },
-  {
-    id: 'recap-27',
-    title: 'Les failles Zero-Day explosent en 2025',
-    imageUrl:
-      'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=1000&auto=format&fit=crop',
-    category: 'Sécurité',
-    readingTime: 4,
-    relatedQuestions: ["Qu'est-ce qu'une faille Zero-Day ?", 'Comment les détecter ?'],
-    content:
-      "Le marché noir des vulnérabilités est en plein essor. Les entreprises doivent adopter une posture de sécurité proactive et le 'bug bounty'.",
-    sources: [{ id: 'source-27', url: 'https://zdnet.com', mediaName: 'ZDNet' }],
-  },
-  {
-    id: 'recap-28',
-    title: "L'ascension fulgurante des néobanques",
-    imageUrl:
-      'https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1000&auto=format&fit=crop',
-    category: 'Finance',
-    readingTime: 3,
-    relatedQuestions: ['Sont-elles rentables ?', 'Peut-on leur faire confiance ?'],
-    content:
-      'Revolut, N26 et consorts captent la jeunesse avec des frais réduits et une UX impeccable. Les banques traditionnelles sont forcées de se réinventer.',
-    sources: [{ id: 'source-28', url: 'https://techcrunch.com', mediaName: 'TechCrunch' }],
-  },
-  {
-    id: 'recap-29',
-    title: 'Livraison par drone : la réglementation évolue',
-    imageUrl:
-      'https://images.unsplash.com/photo-1508614589041-895b8c9e609a?q=80&w=1000&auto=format&fit=crop',
-    category: 'Transport',
-    readingTime: 3,
-    relatedQuestions: ['Est-ce bruyant ?', 'Quid de la sécurité aérienne ?'],
-    content:
-      'Amazon et Google obtiennent de nouvelles autorisations. La livraison de médicaments en zone rurale par drone devient une réalité quotidienne.',
-    sources: [{ id: 'source-29', url: 'https://theverge.com', mediaName: 'The Verge' }],
-  },
-  {
-    id: 'recap-30',
-    title: 'Tech for Good : la technologie au service du climat',
-    imageUrl:
-      'https://images.unsplash.com/photo-1497436072909-60f360e1d4b0?q=80&w=1000&auto=format&fit=crop',
-    category: 'Technologie',
-    readingTime: 5,
-    relatedQuestions: ['Le numérique est-il polluant ?', 'Quelles innovations pour le climat ?'],
-    content:
-      "De la capture de carbone à l'optimisation énergétique par IA, la tech joue un rôle clé dans la transition écologique. Les investissements 'impact' se multiplient.",
-    sources: [{ id: 'source-30', url: 'https://weforum.org', mediaName: 'WEF' }],
   },
 ]
 
 export const MOCK_RECAPS_OVERVIEW: RecapOverview[] = MOCK_RECAPS_DATA.map((r) => ({
   id: r.id,
-  title: r.title,
-  content: r.content,
-  imageUrl: r.imageUrl,
-  category: r.category,
-  readingTime: r.readingTime,
+  title: r.article.title,
+  content: r.article.contentRecap,
+  imageUrl: r.article.imageUrl,
+  category: r.article.category,
+  createdAt: r.article.createdAt,
 }))
 
 export const MOCK_RECAP_DETAILS: Record<string, Recap> = MOCK_RECAPS_DATA.reduce(

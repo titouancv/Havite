@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
-import RecapCard, { type RecapOverview } from '../recap-card/RecapCard'
 import styles from './recap-card-list.module.scss'
+import type { RecapOverview } from '@/types'
+import RecapCard from '../recap-card/RecapCard'
 
 interface RecapCardListProps {
   recapOverviews: RecapOverview[]
