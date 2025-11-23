@@ -18,6 +18,7 @@
     "@tanstack/react-router": "^1.131.8",
     "@tanstack/react-router-devtools": "^1.131.8",
     "jiti": "^2.5.1",
+    "lucide-react": "^0.554.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "sass": "^1.90.0",
