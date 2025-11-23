@@ -17,11 +17,28 @@
     cursor: pointer;
     text-align: left;
     border: none;
-    border-bottom: 1px solid #eff3f4;
+    border-bottom: 1px solid semantic.$border-layer-1;
     transition: background-color 0.2s ease;
 
-    &:hover {
-        background-color: rgb(0 0 0 / 3%);
+        &:hover {
+        background-color: semantic.$background-layer-1-hover;
+        color: semantic.$text-default-highlight;
+    }
+
+    &.activeUp {
+        color: semantic.$status-info; // Twitter/Blue color for upvote
+        
+        &:hover {
+            background-color: semantic.$background-layer-2-hover; // Approximation
+        }
+    }
+
+    &.activeDown {
+        color: semantic.$status-error; // Red/Pink color for downvote
+        
+        &:hover {
+            background-color: semantic.$background-layer-2-hover; // Approximation
+        }
     }
 }
 
@@ -31,8 +48,8 @@
 }
 
 .avatar {
-    width: 40px;
-    height: 40px;
+    width: spacing.$spacing-10;
+    height: spacing.$spacing-10;
     border-radius: spacing.$spacing-1;
     background-color: semantic.$background-layer-3;
     display: flex;
@@ -83,7 +100,7 @@
 
 .text {
     font-size: 1rem;
-    color: #0f1419;
+    color: semantic.$text-default;
     line-height: 1.5;
     margin: 0;
     overflow-wrap: break-word;
@@ -93,7 +110,7 @@
     width: 40%;
     border-radius: spacing.$spacing-1;
     overflow: hidden;
-    border: 1px solid #cfd9de;
+    border: 1px solid semantic.$border-layer-2;
     margin-top: spacing.$spacing-2;
 }
 
@@ -105,3 +122,42 @@
     display: block;
 }
 
+.footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: spacing.$spacing-4;
+    margin-top: spacing.$spacing-2;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  opacity: 0.7;
+  transition: 0.15s ease;
+}
+
+.actionButton:hover {
+  opacity: 1;
+  background: rgb(0 0 0 / 5%);
+}
+
+.activeUp {
+  color: semantic.$text-default-highlight; // Twitter/Blue color for upvote
+  opacity: 1;
+}
+
+.activeDown {
+  color: semantic.$text-default-highlight; // Red/Pink color for downvote
+  opacity: 1;
+}
+
+
+.voteCount {
+    font-size: 0.85rem;
+    margin-left: spacing.$spacing-1;
+    font-weight: 500;
+}

@@ -14,11 +14,14 @@ function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalRecapOverview, setModalRecapOverview] = useState({
     id: '',
+    articleId: '',
     title: '',
     content: '',
     imageUrl: '',
     category: '',
     createdAt: 0,
+    upVotes: 0,
+    downVotes: 0,
   } as RecapOverview)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('Tous')

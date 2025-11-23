@@ -29,7 +29,7 @@
     align-items: center;
     gap: spacing.$spacing-2;
     font-size: 0.875rem;
-    color: #666;
+    color: semantic.$text-default;
     margin-bottom: spacing.$spacing-2;
 }
 
@@ -40,19 +40,19 @@
 }
 
 .separator {
-    color: #ccc;
+    color: semantic.$border-layer-1;
 }
 
 .relatedQuestions {
     margin-top: spacing.$spacing-6;
     padding-top: spacing.$spacing-4;
-    border-top: 1px solid #eee;
+    border-top: 1px solid semantic.$border-layer-1;
     width: 100%;
 
     h4 {
         font-size: 1.1rem;
         margin-bottom: spacing.$spacing-3;
-        color: #333;
+        color: semantic.$text-default-highlight;
     }
 
     ul {
@@ -69,8 +69,8 @@
     width: 100%;
     text-align: left;
     padding: spacing.$spacing-3;
-    background-color: #f9f9f9;
-    border: 1px solid #eee;
+    background-color: semantic.$background-layer-2;
+    border: 1px solid semantic.$border-layer-1;
     border-radius: spacing.$spacing-1;
     cursor: pointer;
     display: flex;
@@ -80,13 +80,13 @@
     transition: background-color 0.2s;
 
     &:hover {
-        background-color: #f0f0f0;
+        background-color: semantic.$background-layer-2-hover;
     }
 }
 
 .plusIcon {
     font-size: 1.2rem;
-    color: #888;
+    color: semantic.$text-default;
 }
 
 

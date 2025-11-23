@@ -11,7 +11,7 @@ interface RecapViewProps {
 }
 
 const RecapView: React.FC<RecapViewProps> = ({ recapOverview }) => {
-  const recap = useFetchRecapByArticleId(recapOverview.id)
+  const recap = useFetchRecapByArticleId(recapOverview.articleId)
 
   const imageUrl = recap.article?.imageUrl || recapOverview.imageUrl
 

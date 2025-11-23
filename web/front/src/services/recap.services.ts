@@ -23,12 +23,13 @@ export function useFetchRecapByArticleId(articleId: string): Recap {
         return mockRecap
       }
 
-      // Requête unique avec LEFT JOIN implicite sur sources et media
       const { data, error } = await supabase
         .from('recap')
         .select(
           `
           id,
+          up_votes,
+          down_votes,
           article:article_id (
             id,
             title,
@@ -54,14 +55,11 @@ export function useFetchRecapByArticleId(articleId: string): Recap {
         .eq('article_id', articleId)
         .maybeSingle()
 
-      if (error) {
-        throw error
-      }
+      if (error) throw error
       if (!data) throw new Error('Recap not found for this article')
 
       const r = data as unknown as DBRecap
 
-      // Mapping sécurisé des sources et media
       const sources = (r.sources || []).map((s) => ({
         id: s.id,
         url: s.url,
@@ -77,6 +75,8 @@ export function useFetchRecapByArticleId(articleId: string): Recap {
 
       return {
         id: r.id,
+        upVotes: r.up_votes ?? 0,
+        downVotes: r.down_votes ?? 0,
         article: {
           id: r.article?.id || '',
           title: r.article?.title || '',
@@ -92,10 +92,11 @@ export function useFetchRecapByArticleId(articleId: string): Recap {
     },
   })
 
-  // Loading fallback
   if (isLoading)
     return {
       id: '',
+      upVotes: 0,
+      downVotes: 0,
       article: {
         id: '',
         title: 'Loading...',
@@ -109,10 +110,11 @@ export function useFetchRecapByArticleId(articleId: string): Recap {
       sources: [],
     }
 
-  // Error fallback
   if (isError || !recap)
     return {
       id: articleId,
+      upVotes: 0,
+      downVotes: 0,
       article: {
         id: articleId,
         title: 'Erreur de chargement',
@@ -145,15 +147,15 @@ export function useFetchAllRecapsOverview() {
 
       const limit = 10
 
-      // Query 'article' directly to allow sorting by 'created_at'
-      // Use !inner join on 'recap' to only get articles that have a recap
       let query = supabase
         .from('article')
         .select(
           `
             *,
             recap!inner (
-              id
+              id,
+              up_votes,
+              down_votes
             )
           `
         )
@@ -169,15 +171,22 @@ export function useFetchAllRecapsOverview() {
 
       const hasNextPage = data.length > limit
       const items = hasNextPage ? data.slice(0, limit) : data
+
       const mappedItems: RecapOverview[] = items.map((row) => {
-        const r = row as DBArticle & { recap: { id: string }[] }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const r = row as any
+        const recapData = Array.isArray(r.recap) ? r.recap[0] : r.recap
+
         return {
-          id: r.id,
+          id: recapData?.id || '',
+          articleId: r.id,
           title: r.title,
           content: r.content_recap,
           imageUrl: r.image_url,
           category: r.category,
           createdAt: r.created_at,
+          upVotes: recapData?.up_votes ?? 0,
+          downVotes: recapData?.down_votes ?? 0,
         }
       })
 

@@ -1,8 +1,18 @@
 import styles from './header.module.scss'
 import logoMonogram from '@/assets/logoMonogram.svg'
-import { Link } from '@tanstack/react-router'
+import { Link, useRouter } from '@tanstack/react-router'
+import { useAuth } from '@/hooks/useAuth'
+import Button from '@/components/button/Button'
 
 function Header() {
+  const { user, logout } = useAuth()
+
+  const router = useRouter()
+
+  const goLogin = () => {
+    router.navigate({ to: '/login' })
+  }
+
   return (
     <header className={styles.headerContainer}>
       <Link to="/">
@@ -11,6 +21,20 @@ function Header() {
           <h1>HAVITE</h1>
         </div>
       </Link>
+      <div className={styles.authContainer}>
+        {user ? (
+          <Button onClick={() => logout()}>
+            {user.avatarUrl ? (
+              <img src={user.avatarUrl} alt={user.name} className={styles.avatarImg} />
+            ) : (
+              <div className={styles.avatarFallback}>{user.name[0]}</div>
+            )}
+            Se déconnecter
+          </Button>
+        ) : (
+          <Button onClick={() => goLogin()}>Se connecter</Button>
+        )}
+      </div>
     </header>
   )
 }

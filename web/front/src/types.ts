@@ -1,14 +1,19 @@
 export interface RecapOverview {
   id: string
+  articleId: string // 👈 ajouté
   title: string
   content: string
   imageUrl: string
   category: string
   createdAt: number
+  upVotes: number
+  downVotes: number
 }
 
 export interface Recap {
   id: string
+  upVotes: number // 👈 ajouté
+  downVotes: number // 👈 ajouté
   article: Article
   sources: Sources[]
 }
@@ -35,4 +40,11 @@ export interface Media {
   name: string
   url: string
   logoUrl: string
+}
+
+export interface User {
+  id: string
+  email: string
+  name: string
+  avatarUrl?: string
 }
