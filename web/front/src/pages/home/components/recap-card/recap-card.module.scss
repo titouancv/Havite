@@ -1,14 +1,107 @@
 @use '../../../../style/component'  as component;
 @use '../../../../style/spacing' as spacing;
+@use '../../../../style/breakpoint' as breakpoint;
+@use '../../../../style/semantic' as semantic;
 
-
-.recapCard{
+.recapCard {
     @include component.component-style(layer-2, false, true);
-
+    
     display: flex;
-    justify-content: start;
-    cursor: pointer;;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: spacing.$spacing-3;
     width: 100%;
-    padding: spacing.$spacing-4;
-    border-radius: spacing.$spacing-1;
+    padding: spacing.$spacing-3;
+    border-radius: 0; // Tweet style often has less rounded or no radius in lists, but let's keep it clean
+    background-color: transparent; // Or white
+    cursor: pointer;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid #eff3f4;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: rgb(0 0 0 / 3%);
+    }
 }
+
+.avatarColumn {
+    flex-shrink: 0;
+    padding-top: spacing.$spacing-1;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #eff3f4; // Light gray background
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #536471; // Icon color
+}
+
+.contentColumn {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0; // Allow text truncation
+    gap: spacing.$spacing-1;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: spacing.$spacing-1;
+    font-size: 0.95rem;
+    line-height: 1.2;
+}
+
+.categoryName {
+    font-weight: 700;
+    color: #0f1419;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dot {
+    color: #536471;
+}
+
+.time {
+    color: #536471;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: spacing.$spacing-3;
+}
+
+.text {
+    font-size: 1rem;
+    color: #0f1419;
+    line-height: 1.5;
+    margin: 0;
+    overflow-wrap: break-word;
+}
+
+.imageContainer {
+    width: 40%;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #cfd9de;
+    margin-top: spacing.$spacing-2;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    max-height: 150px; // Limit height
+    object-fit: cover;
+    display: block;
+}
+

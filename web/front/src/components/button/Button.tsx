@@ -1,13 +1,13 @@
 import React from 'react'
-import styles from './button-component.module.scss'
+import styles from './button.module.scss'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  content: string
+  children: React.ReactNode
   variant?: 'primary' | 'secondary'
 }
 
 const Button: React.FC<ButtonProps> = ({
-  content,
+  children,
   variant = 'secondary',
   className,
   ...props
@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
       className={`${styles.buttonComponent} ${variant === 'primary' ? styles.primary : ''} ${className || ''}`}
       {...props}
     >
-      {content}
+      {children}
     </button>
   )
 }

@@ -34,12 +34,18 @@
         align-items: start;
         justify-content: start;
         width:100%;
-        height: 100%;
+        flex: 1;
+        overflow: hidden;
         gap: spacing.$spacing-8;
         padding-inline: spacing.$spacing-4;
+        padding-top: 0%;
 
         @media (max-width: breakpoint.$tablet) {
             gap: spacing.$spacing-3;
+        }
+
+        @media (max-width: breakpoint.$mobile) {
+            padding-top: spacing.$spacing-2;
         }
     }
 }

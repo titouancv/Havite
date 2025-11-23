@@ -29,7 +29,7 @@ export default [
     rules: {
       // Règles ESLint
       'no-unused-vars': 'warn',
-      'no-console': 'warn',
+      'no-console': 'off',
 
       // Règles TypeScript (exemples)
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],

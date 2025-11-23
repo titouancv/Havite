@@ -1,4 +1,4 @@
-import ButtonComponent from '../../../../components/button/ButtonComponent'
+import Button from '@/components/button/Button'
 import styles from './sources.module.scss'
 
 interface SourcesData {
@@ -22,11 +22,12 @@ const Sources: React.FC<SourcesProps> = ({ sources = [] }) => {
       {sources.map((source, index) => (
         <div key={index} className={styles.sources_item}>
           <p>{source.mediaName}</p>
-          <ButtonComponent
-            isPrimary={true}
-            hanndleClick={() => openSourceLink(source.url)}
-            content="Voir l'article"
-          />
+          <Button
+            variant="primary"
+            onClick={() => openSourceLink(source.url)}
+          >
+            Voir l'article
+          </Button>
         </div>
       ))}
     </div>

@@ -1,0 +1,24 @@
+{
+  "name": "havite-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "web/front",
+    "web/services",
+    "news-bot"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "dev:front": "npm run dev --workspace=front",
+    "dev:services": "npm run dev --workspace=services",
+    "dev:bot": "npm run dev --workspace=news-scrapper",
+    "build:front": "npm run build --workspace=front",
+    "build:services": "npm run build --workspace=services",
+    "build:all": "npm run build --workspaces",
+    "lint:all": "npm run lint --workspaces",
+    "test:all": "npm run test --workspaces --if-present"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

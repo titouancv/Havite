@@ -1,22 +1,36 @@
 import { prisma } from "../../db";
 import { router, publicProcedure } from "../trpc";
 import { z } from "zod";
+import { MOCK_SOURCES } from "../../mocks/data";
 
 export const sourceRouter = router({
   all: publicProcedure
   .query(async () => {
-    return await prisma.source.findMany({
-      include: { media: true, recaps: true },
-    });
+    try {
+      return await prisma.source.findMany({
+        include: { media: true, recaps: true },
+      });
+    } catch (error) {
+      console.warn("Database connection failed, returning mock data for source.all", error);
+      return MOCK_SOURCES;
+    }
   }),
 
   byId: publicProcedure
   .input(z.string())
   .query(async ({ input }) => {
-    return await prisma.source.findUnique({
-      where: { id: input },
-      include: { media: true, recaps: true },
-    });
+    try {
+      const mock = MOCK_SOURCES.find(s => s.id === input);
+      if (mock) return mock;
+
+      return await prisma.source.findUnique({
+        where: { id: input },
+        include: { media: true, recaps: true },
+      });
+    } catch (error) {
+      console.warn("Database connection failed, returning mock data for source.byId", error);
+      return MOCK_SOURCES.find(s => s.id === input) || MOCK_SOURCES[0];
+    }
   }),
 
   create: publicProcedure

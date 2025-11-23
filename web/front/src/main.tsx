@@ -22,7 +22,7 @@ declare module '@tanstack/react-router' {
 const trpcClient = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: 'http://localhost:3000/api/trpc',
+      url: import.meta.env.VITE_TRPC_URL || 'http://localhost:3000/api/trpc',
     }),
   ],
 })
