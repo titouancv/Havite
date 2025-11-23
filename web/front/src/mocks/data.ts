@@ -506,15 +506,22 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       },
     ],
   },
-]
+].map((recap) => ({
+  ...recap,
+  upVotes: Math.floor(Math.random() * 100),
+  downVotes: Math.floor(Math.random() * 50),
+}))
 
 export const MOCK_RECAPS_OVERVIEW: RecapOverview[] = MOCK_RECAPS_DATA.map((r) => ({
   id: r.id,
+  articleId: r.article.id,
   title: r.article.title,
   content: r.article.contentRecap,
   imageUrl: r.article.imageUrl,
   category: r.article.category,
   createdAt: r.article.createdAt,
+  upVotes: r.upVotes,
+  downVotes: r.downVotes,
 }))
 
 export const MOCK_RECAP_DETAILS: Record<string, Recap> = MOCK_RECAPS_DATA.reduce(

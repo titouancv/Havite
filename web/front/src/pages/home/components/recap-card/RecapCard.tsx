@@ -6,8 +6,6 @@ import {
   ShieldCheck,
   Car,
   Newspaper,
-  ThumbsUp,
-  ThumbsDown,
   type LucideIcon,
   SquareArrowDown,
   SquareArrowUp,

@@ -1,6 +1,6 @@
 import type { Recap, RecapOverview } from '@/types'
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
-import { supabase, type DBArticle, type DBRecap } from '../utils/supabase'
+import { supabase, type DBRecap } from '../utils/supabase'
 import { MOCK_RECAPS_DATA, MOCK_RECAPS_OVERVIEW } from '../mocks/data'
 
 const USE_MOCK_DATA = import.meta.env.VITE_USE_MOCK_DATA === 'true'
