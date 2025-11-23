@@ -11,6 +11,7 @@ import {
 import styles from './recap-card.module.scss'
 import { ModalContext } from '../../contexts/ModalContext'
 import type { RecapOverview } from '@/types'
+import { formatDate } from '@/utils/date'
 
 type RecapCardProps = {
   recap: RecapOverview
@@ -78,11 +79,7 @@ function RecapCard({ recap }: RecapCardProps) {
         <div className={styles.header}>
           <span className={styles.categoryName}>{recap.category}</span>
           <span className={styles.dot}>·</span>
-          <span className={styles.time}>
-            {new Date(recap.createdAt).toLocaleDateString() +
-              ' ' +
-              new Date(recap.createdAt).toLocaleTimeString()}
-          </span>
+          <span className={styles.time}>{formatDate(new Date(recap.createdAt))}</span>
         </div>
         <div className={styles.body}>
           <p className={styles.text}>{recap.content}</p>
