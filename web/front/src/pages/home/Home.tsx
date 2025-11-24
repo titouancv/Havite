@@ -14,7 +14,7 @@ function Home() {
     id: '',
     articleId: '',
     title: '',
-    content: '',
+    summary: '',
     imageUrl: '',
     category: '',
     createdAt: 0,
@@ -30,7 +30,7 @@ function Home() {
 
   const filteredRecaps = recapOverviews.filter((recap) => {
     const category = CATEGORIES[recap.category] || CATEGORIES['all']
-    const matchesSearch = recap.content.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesSearch = recap.summary.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesCategory =
       selectedCategory === 'all' ||
       (category.id === 'all' && selectedCategory === 'news') ||

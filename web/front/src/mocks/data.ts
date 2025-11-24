@@ -10,7 +10,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop',
       category: 'science',
       readingTime: 4,
-      contentRecap:
+      summary:
         "L'intelligence artificielle générative ne montre aucun signe de ralentissement. De nouveaux modèles plus performants et moins énergivores émergent chaque semaine.",
       content:
         "L'intelligence artificielle générative ne montre aucun signe de ralentissement. De nouveaux modèles plus performants et moins énergivores émergent chaque semaine. Les géants de la tech comme les startups rivalisent d'ingéniosité pour intégrer ces technologies dans nos outils quotidiens.",
@@ -38,7 +38,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1581092795362-5b6f1f8b8d38?q=80&w=1000&auto=format&fit=crop',
       category: 'Énergie',
       readingTime: 5,
-      contentRecap:
+      summary:
         "L'Europe investit massivement dans les énergies renouvelables pour atteindre ses objectifs climatiques à 2030.",
       content:
         'Les gouvernements européens mettent en place des politiques ambitieuses pour réduire les émissions de CO2 et favoriser l’adoption des énergies propres.',
@@ -61,7 +61,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1600071099124-1ef2f6924c63?q=80&w=1000&auto=format&fit=crop',
       category: 'Industrie',
       readingTime: 3,
-      contentRecap:
+      summary:
         'Les constructeurs automobiles utilisent l’impression 3D pour produire des pièces plus rapidement et à moindre coût.',
       content:
         'Grâce à l’impression 3D, les entreprises automobiles peuvent fabriquer des prototypes et des pièces sur mesure avec une grande précision.',
@@ -89,7 +89,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=1000&auto=format&fit=crop',
       category: 'economy',
       readingTime: 4,
-      contentRecap:
+      summary:
         'Les banques centrales ajustent leurs politiques pour limiter l’inflation et stabiliser les marchés.',
       content:
         'Avec l’inflation persistante, les investisseurs et gouvernements cherchent à adapter leurs stratégies financières afin de protéger l’économie mondiale.',
@@ -117,7 +117,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1581093455648-23b05f76a6a2?q=80&w=1000&auto=format&fit=crop',
       category: 'science',
       readingTime: 5,
-      contentRecap:
+      summary:
         'Les agences spatiales dévoilent des découvertes majeures sur les exoplanètes et les possibilités de vie extraterrestre.',
       content:
         'Les télescopes et missions spatiales récentes permettent d’explorer des planètes lointaines et de mieux comprendre la formation de notre univers.',
@@ -140,7 +140,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=1000&auto=format&fit=crop',
       category: 'Santé',
       readingTime: 3,
-      contentRecap:
+      summary:
         'De plus en plus d’entreprises mettent en place des programmes de soutien à la santé mentale de leurs employés.',
       content:
         'Le bien-être au travail est désormais considéré comme un levier essentiel de productivité et de rétention des talents.',
@@ -168,7 +168,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1000&auto=format&fit=crop',
       category: 'Urbanisme',
       readingTime: 4,
-      contentRecap:
+      summary:
         'L’IoT et les données massives permettent d’optimiser le trafic et l’éclairage public dans les villes intelligentes.',
       content:
         'Grâce aux technologies connectées, les villes peuvent améliorer la qualité de vie des citoyens tout en réduisant leur empreinte écologique.',
@@ -196,7 +196,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1596495577886-d920f1f3b6de?q=80&w=1000&auto=format&fit=crop',
       category: 'economy',
       readingTime: 3,
-      contentRecap:
+      summary:
         'De plus en plus d’entreprises adoptent le recyclage et la réutilisation pour réduire leur impact environnemental.',
       content:
         'L’économie circulaire devient un modèle incontournable pour répondre aux enjeux environnementaux et économiques actuels.',
@@ -224,7 +224,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1000&auto=format&fit=crop',
       category: 'economy',
       readingTime: 4,
-      contentRecap:
+      summary:
         'Le e-economy continue d’évoluer avec des solutions de paiement innovantes et une personnalisation accrue.',
       content:
         'Les marques investissent dans l’expérience client et l’intelligence artificielle pour améliorer leurs ventes en ligne.',
@@ -247,7 +247,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1521334884684-d80222895322?q=80&w=1000&auto=format&fit=crop',
       category: 'culture',
       readingTime: 3,
-      contentRecap:
+      summary:
         'Les marques adoptent des pratiques écoresponsables pour répondre à la demande croissante de mode durable.',
       content:
         'Recyclage des matériaux, production locale et transparence deviennent les maîtres-mots de l’industrie de la mode en 2025.',
@@ -270,7 +270,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1604335399106-76a7f2e1c6a0?q=80&w=1000&auto=format&fit=crop',
       category: 'sports',
       readingTime: 4,
-      contentRecap:
+      summary:
         'Les championnats féminins attirent de plus en plus de spectateurs et d’investissements.',
       content:
         'Les clubs mettent en place des infrastructures et des programmes pour soutenir le développement du football féminin.',
@@ -293,7 +293,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1614680376988-7d05d5d44d18?q=80&w=1000&auto=format&fit=crop',
       category: 'economy',
       readingTime: 5,
-      contentRecap:
+      summary:
         'Les gouvernements mettent en place des régulations pour sécuriser les transactions en crypto-monnaies.',
       content:
         'Face à la volatilité des cryptos, la régulation vise à protéger les investisseurs tout en favorisant l’innovation financière.',
@@ -316,7 +316,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000&auto=format&fit=crop',
       category: 'politics',
       readingTime: 4,
-      contentRecap:
+      summary:
         'Chaque année, des millions de tonnes de plastique polluent les océans, menaçant la faune marine.',
       content:
         'Des initiatives de nettoyage et des politiques de réduction des plastiques à usage unique se multiplient pour protéger les océans.',
@@ -339,7 +339,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1580281657523-cd92c0b6f064?q=80&w=1000&auto=format&fit=crop',
       category: 'Santé',
       readingTime: 3,
-      contentRecap:
+      summary:
         'La chirurgie assistée par robot permet des opérations plus précises et moins invasives.',
       content:
         'Les robots chirurgiens améliorent les résultats pour les patients et réduisent les risques opératoires.',
@@ -367,7 +367,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1581276879432-15a2f5c3c9ab?q=80&w=1000&auto=format&fit=crop',
       category: 'culture',
       readingTime: 2,
-      contentRecap:
+      summary:
         'Les podcasts éducatifs attirent de plus en plus d’auditeurs grâce à des contenus spécialisés et accessibles.',
       content:
         'Universités, journalistes et experts partagent leurs connaissances via des podcasts, renforçant l’apprentissage informel.',
@@ -390,7 +390,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=1000&auto=format&fit=crop',
       category: 'culture',
       readingTime: 3,
-      contentRecap:
+      summary:
         'Des studios explorent l’IA pour générer des effets visuels et scénarios dans le cinéma moderne.',
       content:
         'L’IA permet de créer des animations et des environnements virtuels plus immersifs et moins coûteux.',
@@ -413,7 +413,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1587613865769-0cc91c1a9b5c?q=80&w=1000&auto=format&fit=crop',
       category: 'international',
       readingTime: 4,
-      contentRecap:
+      summary:
         'Le télétravail se pérennise, obligeant les entreprises à repenser leurs méthodes de management et d’organisation.',
       content:
         'De nouvelles technologies et outils collaboratifs facilitent le travail à distance et l’équilibre vie pro-vie perso.',
@@ -441,7 +441,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1606813906726-d6aa026d404d?q=80&w=1000&auto=format&fit=crop',
       category: 'Éducation',
       readingTime: 3,
-      contentRecap:
+      summary:
         'Les jeux vidéo éducatifs sont de plus en plus utilisés pour favoriser l’apprentissage interactif et ludique.',
       content:
         'Des écoles et universités intègrent des serious games pour stimuler la créativité et la réflexion des étudiants.',
@@ -464,7 +464,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1000&auto=format&fit=crop',
       category: 'economy',
       readingTime: 4,
-      contentRecap:
+      summary:
         'Les ventes de véhicules électriques augmentent grâce à des incitations gouvernementales et une infrastructure de recharge en expansion.',
       content:
         'Les constructeurs automobiles investissent massivement dans les véhicules propres pour répondre à la demande croissante des consommateurs.',
@@ -487,7 +487,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
         'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=1000&auto=format&fit=crop',
       category: 'science',
       readingTime: 3,
-      contentRecap:
+      summary:
         'La blockchain est utilisée pour assurer la transparence et la traçabilité dans l’industrie alimentaire.',
       content:
         'Les consommateurs peuvent désormais vérifier l’origine et la qualité des produits grâce aux registres numériques sécurisés.',
@@ -516,7 +516,7 @@ export const MOCK_RECAPS_OVERVIEW: RecapOverview[] = MOCK_RECAPS_DATA.map((r) =>
   id: r.id,
   articleId: r.article.id,
   title: r.article.title,
-  content: r.article.contentRecap,
+  summary: r.article.summary,
   imageUrl: r.article.imageUrl,
   category: r.article.category,
   createdAt: r.article.createdAt,

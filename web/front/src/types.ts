@@ -12,9 +12,9 @@ import {
 
 export interface RecapOverview {
   id: string
-  articleId: string // 👈 ajouté
+  articleId: string
   title: string
-  content: string
+  summary: string
   imageUrl: string
   category: string
   createdAt: number
@@ -24,8 +24,8 @@ export interface RecapOverview {
 
 export interface Recap {
   id: string
-  upVotes: number // 👈 ajouté
-  downVotes: number // 👈 ajouté
+  upVotes: number
+  downVotes: number
   article: Article
   sources: Sources[]
 }
@@ -33,7 +33,7 @@ export interface Recap {
 export interface Article {
   id: string
   title: string
-  contentRecap: string
+  summary: string
   content: string
   imageUrl: string
   category: string

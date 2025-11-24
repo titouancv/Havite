@@ -1,0 +1,158 @@
+@use '../../style/spacing' as spacing;
+@use '../../style/component'  as component;
+@use '../../style/semantic' as semantic;
+@use '../../style/breakpoint' as breakpoint;
+
+.container {
+  padding: spacing.$spacing-4;
+  display: flex;
+  flex-direction: column;
+  gap: spacing.$spacing-4;
+}
+
+.googleButton {
+  background: semantic.$background-layer-1;
+  border: 1px solid semantic.$border-layer-1;
+  padding: spacing.$spacing-2 spacing.$spacing-4;
+  border-radius: spacing.$spacing-2;
+  cursor: pointer;
+}
+
+
+
+.pageContainerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    height: 100vh;
+}
+
+
+
+
+.pageContainer {
+    &Wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content:space-between;
+        width:100%;
+        max-width: 1220px;
+        height: 100%;
+    }
+
+    
+    
+    &_body{
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+        width:100%;
+        flex: 1;
+        overflow: hidden;
+        gap: spacing.$spacing-8;
+        padding-inline: spacing.$spacing-4;
+        padding-top: spacing.$spacing-4;
+
+        @media (max-width: breakpoint.$tablet) {
+            gap: spacing.$spacing-3;
+        }
+
+    }
+}
+
+
+.profil{
+    @include component.component-style(layer-1, false, false);
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding-inline: spacing.$spacing-4;
+    gap: spacing.$spacing-6;
+    z-index: 1000;
+
+    &_header {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    &_title {
+        font-weight: bold;
+        max-width: 80%;
+    }
+
+    &_close {
+        padding: spacing.$spacing-3;
+        cursor: pointer;
+    }
+
+}
+
+/* ---- INPUTS ---- */
+.inputDisabled {
+  width: 100%;
+  padding: spacing.$spacing-2 spacing.$spacing-3;
+  border-radius: spacing.$spacing-2;
+  border: 1px solid semantic.$background-layer-2;
+  background: semantic.$background-layer-2;
+  color: semantic.$text-default;
+
+  &:disabled {
+    opacity: 0.8;
+  }
+}
+
+.inputName {
+  width: 100%;
+  padding: spacing.$spacing-2 spacing.$spacing-3;
+  border-radius: spacing.$spacing-2;
+  color: semantic.$text-default;
+  border: 1px solid semantic.$border-layer-3;
+  background: semantic.$background-layer-3;
+}
+
+/* ---- SAVE PANEL ---- */
+.saveRow {
+  display: flex;
+  align-items: center;
+  gap: spacing.$spacing-4;
+  padding-top: spacing.$spacing-4;
+}
+
+.messageSuccess {
+  color: semantic.$status-success; /* text-green-600 */
+}
+
+.messageError {
+  color: semantic.$status-error; /* text-red-500 */
+}
+
+/* ---- DANGER ZONE ---- */
+.dangerZone {
+  padding-top: spacing.$spacing-6;
+}
+
+.dangerTitle {
+  margin-bottom: spacing.$spacing-4;
+  color: semantic.$status-error;
+}
+
+/* ---- LOGOUT BUTTON ---- */
+.logoutBtn {
+  border: 1px solid semantic.$status-error;
+  color: semantic.$text-on-color;
+  background-color: semantic.$status-error;
+
+  &:hover {
+    color: semantic.$text-on-color-highlight;
+  }
+}

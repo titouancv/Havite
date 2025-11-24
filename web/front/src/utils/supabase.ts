@@ -51,7 +51,7 @@ export interface DBSource {
 export interface DBArticle {
   id: string
   title: string
-  content_recap: string
+  summary: string
   content: string
   image_url: string
   category: string

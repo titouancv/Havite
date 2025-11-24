@@ -1,5 +1,6 @@
 @use '../../../../style/spacing' as spacing;
 @use '../../../../style/component'  as component;
+@use '../../../../style/breakpoint'  as breakpoint;
 
 .modal{
     @include component.component-style(layer-1, false, false);
@@ -32,9 +33,20 @@
         width: 100%;
     }
 
+    &_body {
+        display: flex-1;
+        width: 100%;
+        overflow-y: auto;
+        padding-bottom: spacing.$spacing-4;
+    }
+
     &_title {
         font-weight: bold;
         max-width: 80%;
+
+        @media (max-width: breakpoint.$mobile) {
+            font-size: 1.2rem;
+        }
     }
 
     &_close {

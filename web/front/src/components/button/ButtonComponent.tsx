@@ -6,12 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary'
 }
 
-const Button: React.FC<ButtonProps> = ({
-  content,
-  variant = 'secondary',
-  className,
-  ...props
-}) => {
+const Button: React.FC<ButtonProps> = ({ content, variant = 'secondary', className, ...props }) => {
   return (
     <button
       className={`${styles.buttonComponent} ${variant === 'primary' ? styles.primary : ''} ${className || ''}`}

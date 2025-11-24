@@ -5,6 +5,7 @@ import { useFetchRecapByArticleId } from '../../../../services/recap.services'
 import { CATEGORIES, type RecapOverview } from '@/types'
 import { testImageURL } from '../recap-card/RecapCard'
 import { useEffect, useState } from 'react'
+import Social from '../social/Social'
 
 interface RecapViewProps {
   recapOverview: RecapOverview
@@ -40,6 +41,7 @@ const RecapView: React.FC<RecapViewProps> = ({ recapOverview }) => {
         <p>{recap.article?.content}</p>
       </div>
       <div className={styles.actions}>
+        <Social recapId={recap.id} />
         <MessageInfoBoxComponent
           content="Article généré par l’intelligence artificielle"
           type="info"

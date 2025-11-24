@@ -33,7 +33,7 @@ export function useFetchRecapByArticleId(articleId: string): Recap {
           article:article_id (
             id,
             title,
-            content_recap,
+            summary,
             content,
             image_url,
             category,
@@ -80,7 +80,7 @@ export function useFetchRecapByArticleId(articleId: string): Recap {
         article: {
           id: r.article?.id || '',
           title: r.article?.title || '',
-          contentRecap: r.article?.content_recap || '',
+          summary: r.article?.summary || '',
           content: r.article?.content || '',
           imageUrl: r.article?.image_url || '',
           category: r.article?.category || '',
@@ -100,7 +100,7 @@ export function useFetchRecapByArticleId(articleId: string): Recap {
       article: {
         id: '',
         title: 'Loading...',
-        contentRecap: '',
+        summary: '',
         content: 'Loading...',
         imageUrl: '',
         category: '',
@@ -118,7 +118,7 @@ export function useFetchRecapByArticleId(articleId: string): Recap {
       article: {
         id: articleId,
         title: 'Erreur de chargement',
-        contentRecap: 'Impossible de charger le contenu.',
+        summary: 'Impossible de charger le contenu.',
         content: 'Impossible de charger le contenu.',
         imageUrl: '',
         category: '',
@@ -181,7 +181,7 @@ export function useFetchAllRecapsOverview() {
           id: recapData?.id || '',
           articleId: r.id,
           title: r.title,
-          content: r.content_recap,
+          summary: r.summary,
           imageUrl: r.image_url,
           category: r.category,
           createdAt: r.created_at,

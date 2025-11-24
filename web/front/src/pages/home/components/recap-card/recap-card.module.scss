@@ -140,19 +140,14 @@
   transition: 0.15s ease;
 }
 
-.actionButton:hover {
+.active {
+  color: semantic.$text-on-color; 
+  background-color: semantic.$background-primary; 
   opacity: 1;
-  background: rgb(0 0 0 / 5%);
-}
 
-.activeUp {
-  color: semantic.$text-default-highlight; // Twitter/Blue color for upvote
-  opacity: 1;
-}
-
-.activeDown {
-  color: semantic.$text-default-highlight; // Red/Pink color for downvote
-  opacity: 1;
+  :hover {
+    background: semantic.$background-primary-hover;
+  }
 }
 
 

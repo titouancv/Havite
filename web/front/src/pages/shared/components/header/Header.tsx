@@ -5,12 +5,16 @@ import { useAuth } from '@/hooks/useAuth'
 import Button from '@/components/button/Button'
 
 function Header() {
-  const { user, logout } = useAuth()
+  const { user } = useAuth()
 
   const router = useRouter()
 
   const goLogin = () => {
     router.navigate({ to: '/login' })
+  }
+
+  const goProfil = () => {
+    router.navigate({ to: '/profil' })
   }
 
   return (
@@ -23,16 +27,16 @@ function Header() {
       </Link>
       <div className={styles.authContainer}>
         {user ? (
-          <Button onClick={() => logout()}>
-            {user.avatarUrl ? (
+          <Button onClick={goProfil}>
+            {user.avatarUrl && (
               <img src={user.avatarUrl} alt={user.name} className={styles.avatarImg} />
-            ) : (
-              <div className={styles.avatarFallback}>{user.name[0]}</div>
             )}
-            Se déconnecter
+            {user.name}
           </Button>
         ) : (
-          <Button onClick={() => goLogin()}>Se connecter</Button>
+          <Button variant="primary" onClick={() => goLogin()}>
+            Se connecter
+          </Button>
         )}
       </div>
     </header>
