@@ -6,9 +6,7 @@ import { ModalContext } from './contexts/ModalContext'
 import RecapView from './components/recap-view/RecapView'
 import { useFetchAllRecapsOverview } from '../../services/recap.services'
 import RecapCardList from './components/recap-card-list/RecapCardList'
-import type { RecapOverview } from '@/types'
-
-const CATEGORIES = ['Tous', 'Technologie', 'Finance', 'Hardware', 'Sécurité', 'Transport']
+import { CATEGORIES, type RecapOverview } from '@/types'
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -24,15 +22,19 @@ function Home() {
     downVotes: 0,
   } as RecapOverview)
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('Tous')
+  const [selectedCategory, setSelectedCategory] = useState('all')
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useFetchAllRecapsOverview()
 
   const recapOverviews = data?.pages.flatMap((page) => page.items) || []
 
   const filteredRecaps = recapOverviews.filter((recap) => {
+    const category = CATEGORIES[recap.category] || CATEGORIES['all']
     const matchesSearch = recap.content.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesCategory = selectedCategory === 'Tous' || recap.category === selectedCategory
+    const matchesCategory =
+      selectedCategory === 'all' ||
+      (category.id === 'all' && selectedCategory === 'news') ||
+      recap.category === selectedCategory
     return matchesSearch && matchesCategory
   })
 
@@ -54,14 +56,23 @@ function Home() {
           </div>
 
           <div className={styles.filtersContainer}>
-            {CATEGORIES.map((category) => (
+            {Object.values(CATEGORIES).map((category, index) => (
               <button
-                key={category}
+                key={index}
                 type="button"
-                className={`${styles.filterButton} ${selectedCategory === category ? styles.active : ''}`}
-                onClick={() => setSelectedCategory(category)}
+                className={`${styles.filterButton} ${selectedCategory === category.id ? styles.active : ''}`}
+                onClick={() => setSelectedCategory(category.id)}
+                style={
+                  selectedCategory === category.id
+                    ? {
+                        backgroundColor: category.color,
+                        borderColor: category.color,
+                        color: '#1f2937', // Dark gray for readability on pastel
+                      }
+                    : undefined
+                }
               >
-                {category}
+                {category.label}
               </button>
             ))}
           </div>

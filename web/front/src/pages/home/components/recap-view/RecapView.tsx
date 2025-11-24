@@ -2,7 +2,7 @@ import MessageInfoBoxComponent from '../../../../components/message-info-box/Mes
 import Sources from '../sources/Sources'
 import styles from './recap-view.module.scss'
 import { useFetchRecapByArticleId } from '../../../../services/recap.services'
-import type { RecapOverview } from '@/types'
+import { CATEGORIES, type RecapOverview } from '@/types'
 import { testImageURL } from '../recap-card/RecapCard'
 import { useEffect, useState } from 'react'
 
@@ -23,15 +23,16 @@ const RecapView: React.FC<RecapViewProps> = ({ recapOverview }) => {
     })
   }, [imageUrl])
 
+  const categoryName =
+    CATEGORIES[recap.article?.category || recapOverview.category]?.label || 'Actualité'
+
   return (
     <div className={styles.recapView}>
       {isImageValid && <img src={imageUrl} alt="" className={styles.recapImage} />}
       <div className={styles.content}>
         <div className={styles.content_header}>
           <div className={styles.meta}>
-            <span className={styles.category}>
-              {recap.article?.category || recapOverview.category}
-            </span>
+            <span className={styles.category}>{categoryName}</span>
             <span className={styles.separator}>•</span>
             <span className={styles.readingTime}>{recap.article?.readingTime} min de lecture</span>
           </div>

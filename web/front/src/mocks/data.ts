@@ -8,7 +8,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: "L'IA générative continue de transformer le paysage technologique",
       imageUrl:
         'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop',
-      category: 'Technologie',
+      category: 'science',
       readingTime: 4,
       contentRecap:
         "L'intelligence artificielle générative ne montre aucun signe de ralentissement. De nouveaux modèles plus performants et moins énergivores émergent chaque semaine.",
@@ -87,7 +87,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: 'L’économie mondiale face à la montée de l’inflation',
       imageUrl:
         'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=1000&auto=format&fit=crop',
-      category: 'Économie',
+      category: 'economy',
       readingTime: 4,
       contentRecap:
         'Les banques centrales ajustent leurs politiques pour limiter l’inflation et stabiliser les marchés.',
@@ -98,11 +98,11 @@ export const MOCK_RECAPS_DATA: Recap[] = [
     sources: [
       {
         id: 'source-5',
-        url: 'https://finance.yahoo.com/world-economy-inflation',
+        url: 'https://economy.yahoo.com/world-economy-inflation',
         media: {
           id: 'media-5',
-          name: 'Yahoo Finance',
-          url: 'https://finance.yahoo.com',
+          name: 'Yahoo economy',
+          url: 'https://economy.yahoo.com',
           logoUrl: '',
         },
       },
@@ -115,7 +115,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: 'Nouvelles découvertes dans l’exploration spatiale',
       imageUrl:
         'https://images.unsplash.com/photo-1581093455648-23b05f76a6a2?q=80&w=1000&auto=format&fit=crop',
-      category: 'Science',
+      category: 'science',
       readingTime: 5,
       contentRecap:
         'Les agences spatiales dévoilent des découvertes majeures sur les exoplanètes et les possibilités de vie extraterrestre.',
@@ -194,7 +194,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: 'L’économie circulaire gagne du terrain',
       imageUrl:
         'https://images.unsplash.com/photo-1596495577886-d920f1f3b6de?q=80&w=1000&auto=format&fit=crop',
-      category: 'Économie',
+      category: 'economy',
       readingTime: 3,
       contentRecap:
         'De plus en plus d’entreprises adoptent le recyclage et la réutilisation pour réduire leur impact environnemental.',
@@ -219,13 +219,13 @@ export const MOCK_RECAPS_DATA: Recap[] = [
     id: 'recap-9',
     article: {
       id: 'recap-9',
-      title: 'Les tendances du e-commerce pour 2025',
+      title: 'Les tendances du e-economy pour 2025',
       imageUrl:
         'https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1000&auto=format&fit=crop',
-      category: 'Commerce',
+      category: 'economy',
       readingTime: 4,
       contentRecap:
-        'Le e-commerce continue d’évoluer avec des solutions de paiement innovantes et une personnalisation accrue.',
+        'Le e-economy continue d’évoluer avec des solutions de paiement innovantes et une personnalisation accrue.',
       content:
         'Les marques investissent dans l’expérience client et l’intelligence artificielle pour améliorer leurs ventes en ligne.',
       createdAt: 1732982400000,
@@ -245,7 +245,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: 'La mode durable séduit de plus en plus de consommateurs',
       imageUrl:
         'https://images.unsplash.com/photo-1521334884684-d80222895322?q=80&w=1000&auto=format&fit=crop',
-      category: 'Culture',
+      category: 'culture',
       readingTime: 3,
       contentRecap:
         'Les marques adoptent des pratiques écoresponsables pour répondre à la demande croissante de mode durable.',
@@ -268,7 +268,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: 'Le football féminin continue de se professionnaliser',
       imageUrl:
         'https://images.unsplash.com/photo-1604335399106-76a7f2e1c6a0?q=80&w=1000&auto=format&fit=crop',
-      category: 'Sport',
+      category: 'sports',
       readingTime: 4,
       contentRecap:
         'Les championnats féminins attirent de plus en plus de spectateurs et d’investissements.',
@@ -291,7 +291,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: 'Les crypto-monnaies face à la régulation',
       imageUrl:
         'https://images.unsplash.com/photo-1614680376988-7d05d5d44d18?q=80&w=1000&auto=format&fit=crop',
-      category: 'Finance',
+      category: 'economy',
       readingTime: 5,
       contentRecap:
         'Les gouvernements mettent en place des régulations pour sécuriser les transactions en crypto-monnaies.',
@@ -314,7 +314,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: 'Les océans menacés par la pollution plastique',
       imageUrl:
         'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000&auto=format&fit=crop',
-      category: 'Environnement',
+      category: 'politics',
       readingTime: 4,
       contentRecap:
         'Chaque année, des millions de tonnes de plastique polluent les océans, menaçant la faune marine.',
@@ -365,7 +365,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: 'Les podcasts éducatifs connaissent un essor inédit',
       imageUrl:
         'https://images.unsplash.com/photo-1581276879432-15a2f5c3c9ab?q=80&w=1000&auto=format&fit=crop',
-      category: 'Culture',
+      category: 'culture',
       readingTime: 2,
       contentRecap:
         'Les podcasts éducatifs attirent de plus en plus d’auditeurs grâce à des contenus spécialisés et accessibles.',
@@ -388,7 +388,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: 'L’intelligence artificielle dans le cinéma',
       imageUrl:
         'https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=1000&auto=format&fit=crop',
-      category: 'Culture',
+      category: 'culture',
       readingTime: 3,
       contentRecap:
         'Des studios explorent l’IA pour générer des effets visuels et scénarios dans le cinéma moderne.',
@@ -411,7 +411,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: 'Le télétravail redéfinit le monde professionnel',
       imageUrl:
         'https://images.unsplash.com/photo-1587613865769-0cc91c1a9b5c?q=80&w=1000&auto=format&fit=crop',
-      category: 'Travail',
+      category: 'international',
       readingTime: 4,
       contentRecap:
         'Le télétravail se pérennise, obligeant les entreprises à repenser leurs méthodes de management et d’organisation.',
@@ -462,7 +462,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: 'Les véhicules électriques gagnent du terrain',
       imageUrl:
         'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1000&auto=format&fit=crop',
-      category: 'Transport',
+      category: 'economy',
       readingTime: 4,
       contentRecap:
         'Les ventes de véhicules électriques augmentent grâce à des incitations gouvernementales et une infrastructure de recharge en expansion.',
@@ -485,7 +485,7 @@ export const MOCK_RECAPS_DATA: Recap[] = [
       title: 'La blockchain au service de la traçabilité alimentaire',
       imageUrl:
         'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=1000&auto=format&fit=crop',
-      category: 'Technologie',
+      category: 'science',
       readingTime: 3,
       contentRecap:
         'La blockchain est utilisée pour assurer la transparence et la traçabilité dans l’industrie alimentaire.',

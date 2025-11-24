@@ -1,34 +1,18 @@
 import { useContext, useEffect, useState } from 'react'
-import {
-  Cpu,
-  TrendingUp,
-  HardDrive,
-  ShieldCheck,
-  Car,
-  Newspaper,
-  type LucideIcon,
-  SquareArrowDown,
-  SquareArrowUp,
-} from 'lucide-react'
+import { Newspaper, SquareArrowDown, SquareArrowUp } from 'lucide-react'
 import styles from './recap-card.module.scss'
 import { ModalContext } from '../../contexts/ModalContext'
-import type { RecapOverview } from '@/types'
+import { CATEGORIES, type RecapOverview } from '@/types'
 import { formatDate } from '@/utils/date'
 import { useAuth } from '@/hooks/useAuth'
 import { useRecapVote } from '@/hooks/useRecapVote'
 import { useRouter } from '@tanstack/react-router'
 import Button from '@/components/button/Button'
 
+// Map categories to icons
+
 type RecapCardProps = {
   recap: RecapOverview
-}
-
-const CATEGORY_ICONS: Record<string, LucideIcon> = {
-  Technologie: Cpu,
-  Finance: TrendingUp,
-  Hardware: HardDrive,
-  Sécurité: ShieldCheck,
-  Transport: Car,
 }
 
 export const testImageURL = (url: string): Promise<boolean> => {
@@ -96,7 +80,9 @@ function RecapCard({ recap }: RecapCardProps) {
     toggleDownvote()
   }
 
-  const Icon = CATEGORY_ICONS[recap.category] || Newspaper
+  const Icon = CATEGORIES[recap.category]?.icon || Newspaper
+  const categoryName = CATEGORIES[recap.category]?.label || 'Actualité'
+  const categoryColor = CATEGORIES[recap.category]?.color || '#BFDBFE'
 
   return (
     <div
@@ -105,14 +91,21 @@ function RecapCard({ recap }: RecapCardProps) {
       aria-label={`Voir le récapitulatif : ${recap.title}`}
     >
       <div className={styles.avatarColumn}>
-        <div className={styles.avatar}>
+        <div
+          className={styles.avatar}
+          style={{
+            backgroundColor: categoryColor,
+            borderColor: categoryColor,
+            color: '#1f2937', // Dark gray for readability on pastel
+          }}
+        >
           <Icon size={20} strokeWidth={2.5} />
         </div>
       </div>
 
       <div className={styles.contentColumn}>
         <div className={styles.header}>
-          <span className={styles.categoryName}>{recap.category}</span>
+          <span className={styles.categoryName}>{categoryName}</span>
           <span className={styles.dot}>·</span>
           <span className={styles.time}>{formatDate(new Date(recap.createdAt))}</span>
         </div>
