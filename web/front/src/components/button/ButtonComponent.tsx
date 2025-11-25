@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './button-component.module.scss'
+import styles from './button.module.scss'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   content: string

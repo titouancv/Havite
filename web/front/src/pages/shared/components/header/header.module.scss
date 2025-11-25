@@ -2,53 +2,49 @@
 @use '../../../../style/breakpoint' as breakpoint;
 @use '../../../../style/semantic' as semantic;
 
-.headerContainer{
-    display: flex;
-    width: 100%;
-    gap: spacing.$spacing-2;
-    align-items: center;
-    justify-content: center;
-    padding: spacing.$spacing-2 spacing.$spacing-4;
+.headerContainer {
+  display: flex;
+  width: 100%;
+  gap: spacing.$spacing-2;
+  align-items: center;
+  justify-content: center;
+  padding: spacing.$spacing-2 spacing.$spacing-4;
 }
 
-.homeButton{
-    display: flex;
-    gap: spacing.$spacing-2;
-    align-items: center;
-    justify-content: center;
-    
-    h1{
-        font-weight: bold;
-    }
+.homeButton {
+  display: flex;
+  gap: spacing.$spacing-2;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    font-weight: bold;
+  }
 }
 
-.logo{
-    width: spacing.$spacing-10;
-    height: spacing.$spacing-10;
+.userName {
+  display: block;
+  @media (max-width: breakpoint.$mobile) {
+    display: none;
+  }
+}
+
+.logo {
+  width: spacing.$spacing-10;
+  height: spacing.$spacing-10;
 }
 
 .authContainer {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .avatarImg {
-  height: spacing.$spacing-8;       /* h-8 */
-  width: spacing.$spacing-8;        /* w-8 */
+  height: spacing.$spacing-8; /* h-8 */
+  width: spacing.$spacing-8; /* w-8 */
   border-radius: calc(infinity * 1px); /* rounded-full */
-  object-fit: cover;     /* object-cover */
+  object-fit: cover; /* object-cover */
   margin-right: spacing.$spacing-1;
-}
-
-.avatarFallback {
-    display: flex;
-    height: spacing.$spacing-8;        /* h-8 */
-    padding-right: spacing.$spacing-1;
-  width: spacing.$spacing-8;         /* w-8 */
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px; /* rounded-full */
-  background-color: semantic.$status-warning; /* bg-orange-500 */
-  color: semantic.$text-inverted;
-  font-size: 0.75rem;  /* text-xs */
-  font-weight: 700;    /* font-bold */
+  @media (max-width: breakpoint.$mobile) {
+    margin-right: 0;
+  }
 }

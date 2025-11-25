@@ -88,7 +88,10 @@ const Profil = () => {
           <div className={styles.profil}>
             <div className={styles.profil_header}>
               <h1 className={styles.profil_title}>Profil</h1>
-              <div className={styles.profil_close} onClick={() => router.history.back()}>
+              <div
+                className={styles.profil_close}
+                onClick={() => router.history.back()}
+              >
                 <img src={glyph} alt="Close icon" />
               </div>
             </div>
@@ -123,18 +126,35 @@ const Profil = () => {
                   {message && (
                     <span
                       className={
-                        message.includes('Error') ? styles.messageError : styles.messageSuccess
+                        message.includes('Error')
+                          ? styles.messageError
+                          : styles.messageSuccess
                       }
                     >
                       {message}
                     </span>
                   )}
                 </div>
+                <div>
+                  <label className={styles.label}>A propos</label>
+                  <Button
+                    variant="primary"
+                    onClick={() =>
+                      router.navigate({ to: '/about', replace: false })
+                    }
+                  >
+                    En savoir plus sur Havite
+                  </Button>
+                </div>
 
                 <div className={styles.dangerZone}>
                   <h3 className={styles.dangerTitle}>Danger Zone</h3>
 
-                  <Button variant="secondary" onClick={handleLogout} className={styles.logoutBtn}>
+                  <Button
+                    variant="secondary"
+                    onClick={handleLogout}
+                    className={styles.logoutBtn}
+                  >
                     <span>Log out</span>
                     <LogOut />
                   </Button>

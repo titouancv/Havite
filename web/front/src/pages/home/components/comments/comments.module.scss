@@ -1,0 +1,146 @@
+@use '../../../../style/component' as *;
+@use '../../../../style/semantic' as *;
+@use '../../../../style/spacing' as *;
+@use '../../../../style/color' as *;
+
+.commentsSection {
+  padding-top: $spacing-6;
+  width: 100%;
+
+  h2 {
+    margin-bottom: $spacing-4;
+    font-weight: bold;
+  }
+}
+
+.commentForm {
+  display: flex;
+  gap: $spacing-2;
+
+  .inputWrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-1;
+    border: 1px solid $border-layer-2;
+    border-radius: 8px;
+    padding: $spacing-2;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: $spacing-2;
+    resize: vertical;
+    font-family: inherit;
+    color: $text-default;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-300;
+    }
+  }
+
+  button {
+    align-self: flex-end;
+  }
+}
+
+.loginPrompt {
+  margin-bottom: $spacing-6;
+  padding: $spacing-4;
+  background-color: $background-layer-2;
+  border-radius: 8px;
+  text-align: center;
+
+  a {
+    color: $primary-300;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.commentsList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+}
+
+.commentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.repliesList {
+  margin-left: $spacing-8;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+  border-left: 2px solid $border-layer-1;
+  padding-left: $spacing-4;
+}
+
+.comment {
+  display: flex;
+  gap: $spacing-2;
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: $background-layer-2;
+  }
+
+  .content {
+    flex: 1;
+    background-color: $background-layer-2;
+    padding: $spacing-2;
+    border-radius: 8px;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: $spacing-1;
+
+      .author {
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .date {
+        font-size: 0.8rem;
+        color: $gray-600;
+      }
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      white-space: pre-wrap;
+    }
+
+    .actions {
+      margin-top: $spacing-1;
+      display: flex;
+      justify-content: flex-end;
+      gap: $spacing-2;
+
+      button {
+        background: none;
+        border: none;
+        color: $gray-600;
+        font-size: 0.8rem;
+        cursor: pointer;
+        padding: 0;
+
+        &:hover {
+          color: $primary-300;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

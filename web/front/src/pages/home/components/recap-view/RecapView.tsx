@@ -6,6 +6,7 @@ import { CATEGORIES, type RecapOverview } from '@/types'
 import { testImageURL } from '../recap-card/RecapCard'
 import { useEffect, useState } from 'react'
 import Social from '../social/Social'
+import Comments from '../comments/Comments'
 
 interface RecapViewProps {
   recapOverview: RecapOverview
@@ -25,17 +26,22 @@ const RecapView: React.FC<RecapViewProps> = ({ recapOverview }) => {
   }, [imageUrl])
 
   const categoryName =
-    CATEGORIES[recap.article?.category || recapOverview.category]?.label || 'Actualité'
+    CATEGORIES[recap.article?.category || recapOverview.category]?.label ||
+    'Actualité'
 
   return (
     <div className={styles.recapView}>
-      {isImageValid && <img src={imageUrl} alt="" className={styles.recapImage} />}
+      {isImageValid && (
+        <img src={imageUrl} alt="" className={styles.recapImage} />
+      )}
       <div className={styles.content}>
         <div className={styles.content_header}>
           <div className={styles.meta}>
             <span className={styles.category}>{categoryName}</span>
             <span className={styles.separator}>•</span>
-            <span className={styles.readingTime}>{recap.article?.readingTime} min de lecture</span>
+            <span className={styles.readingTime}>
+              {recap.article?.readingTime} min de lecture
+            </span>
           </div>
         </div>
         <p>{recap.article?.content}</p>
@@ -47,6 +53,9 @@ const RecapView: React.FC<RecapViewProps> = ({ recapOverview }) => {
           type="info"
         />
         <Sources sources={recap.sources} />
+      </div>
+      <div className={styles.commentsSection}>
+        <Comments recapId={recap.id} />
       </div>
     </div>
   )

@@ -61,6 +61,17 @@ export interface User {
   avatarUrl?: string
 }
 
+export interface Comment {
+  id: string
+  content: string
+  userId: string
+  recapId: string
+  createdAt: string
+  user?: User
+  parentId?: string | null
+  replies?: Comment[]
+}
+
 export type Category = {
   id: string // unique identifier
   label: string // display label

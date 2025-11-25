@@ -29,9 +29,13 @@ function Header() {
         {user ? (
           <Button onClick={goProfil}>
             {user.avatarUrl && (
-              <img src={user.avatarUrl} alt={user.name} className={styles.avatarImg} />
+              <img
+                src={user.avatarUrl}
+                alt={user.name}
+                className={styles.avatarImg}
+              />
             )}
-            {user.name}
+            <div className={styles.userName}>{user.name}</div>
           </Button>
         ) : (
           <Button variant="primary" onClick={() => goLogin()}>

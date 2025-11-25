@@ -3,113 +3,118 @@
 @use '../../../../style/breakpoint' as breakpoint;
 
 .recapView {
-    display: grid;
-    grid-template-columns: 60% 35%; 
-    align-items: start;  
-    justify-content: space-between;
-    width: 100%;
+  display: grid;
+  grid-template-columns: 60% 35%;
+  align-items: start;
+  justify-content: space-between;
+  width: 100%;
 
-    @media (max-width: breakpoint.$tablet) {
-        gap: spacing.$spacing-6;
-        grid-template-columns: 1fr; 
-    }
+  @media (max-width: breakpoint.$tablet) {
+    gap: spacing.$spacing-6;
+    grid-template-columns: 1fr;
+  }
 }
 
 .recapImage {
-    grid-column: 1 / -1;
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: spacing.$spacing-1;
-    margin-bottom: spacing.$spacing-4;
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: spacing.$spacing-1;
+  margin-bottom: spacing.$spacing-4;
+}
+
+.commentsSection {
+  grid-column: 1 / -1;
+  width: 100%;
+  padding-top: spacing.$spacing-4;
 }
 
 .meta {
-    display: flex;
-    align-items: center;
-    gap: spacing.$spacing-2;
-    font-size: 0.875rem;
-    color: semantic.$text-default;
-    margin-bottom: spacing.$spacing-2;
+  display: flex;
+  align-items: center;
+  gap: spacing.$spacing-2;
+  font-size: 0.875rem;
+  color: semantic.$text-default;
+  margin-bottom: spacing.$spacing-2;
 }
 
 .category {
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .separator {
-    color: semantic.$border-layer-1;
+  color: semantic.$border-layer-1;
 }
 
 .relatedQuestions {
-    margin-top: spacing.$spacing-6;
-    padding-top: spacing.$spacing-4;
-    border-top: 1px solid semantic.$border-layer-1;
-    width: 100%;
+  margin-top: spacing.$spacing-6;
+  padding-top: spacing.$spacing-4;
+  border-top: 1px solid semantic.$border-layer-1;
+  width: 100%;
 
-    h4 {
-        font-size: 1.1rem;
-        margin-bottom: spacing.$spacing-3;
-        color: semantic.$text-default-highlight;
-    }
+  h4 {
+    font-size: 1.1rem;
+    margin-bottom: spacing.$spacing-3;
+    color: semantic.$text-default-highlight;
+  }
 
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: spacing.$spacing-2;
-    }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: spacing.$spacing-2;
+  }
 }
 
 .questionButton {
-    width: 100%;
-    text-align: left;
-    padding: spacing.$spacing-3;
-    background-color: semantic.$background-layer-2;
-    border: 1px solid semantic.$border-layer-1;
-    border-radius: spacing.$spacing-1;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.95rem;
-    transition: background-color 0.2s;
+  width: 100%;
+  text-align: left;
+  padding: spacing.$spacing-3;
+  background-color: semantic.$background-layer-2;
+  border: 1px solid semantic.$border-layer-1;
+  border-radius: spacing.$spacing-1;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  transition: background-color 0.2s;
 
-    &:hover {
-        background-color: semantic.$background-layer-2-hover;
-    }
+  &:hover {
+    background-color: semantic.$background-layer-2-hover;
+  }
 }
 
 .plusIcon {
-    font-size: 1.2rem;
-    color: semantic.$text-default;
+  font-size: 1.2rem;
+  color: semantic.$text-default;
 }
 
-
-.actions{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-    gap: spacing.$spacing-3;
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: spacing.$spacing-3;
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: spacing.$spacing-4;
+
+  &_header {
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: start;
-    gap: spacing.$spacing-4;
-
-    &_header{
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-        justify-content: start;
-        width: 100%;
-    }
+    width: 100%;
+  }
 }
