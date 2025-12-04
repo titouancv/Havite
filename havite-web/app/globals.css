@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  /* Primary colors */
+  --color-primary-100: #b8c6bc;
+  --color-primary-200: #7a9a82;
+  --color-primary-300: #4c7250;
+  --color-primary-400: #305536;
+  --color-primary-500: #1e3823;
+
+  /* Gray colors */
+  --color-gray-50: #fdfdfd;
+  --color-gray-100: #f4f6f4;
+  --color-gray-200: #e8ece8;
+  --color-gray-300: #dadfd9;
+  --color-gray-400: #c9cec9;
+  --color-gray-500: #9a9e9a;
+  --color-gray-600: #4d554d;
+  --color-gray-700: #343c34;
+  --color-gray-800: #1a241a;
+  --color-gray-900: #040604;
+
+  /* Status colors */
+  --color-status-error: #ac3747;
+  --color-status-warning: #f0ad3d;
+  --color-status-success: #9b87ff;
+  --color-status-info: #3a6ea5;
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.5s ease forwards;
+  --animate-fade-out: fade-out 0.5s ease forwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", serif;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
+}
