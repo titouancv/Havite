@@ -1,18 +1,19 @@
-import styles from './profil.module.scss'
 import { useAuth } from '@/hooks/useAuth'
 import glyph from '../../assets/glyph.svg'
 import { useRouter } from '@tanstack/react-router'
-import Button from '@/components/button/Button'
+import Button from '@/components/Button'
 import { LogOut } from 'lucide-react'
 import { useEffect, useState, useCallback } from 'react'
 import { supabase } from '@/utils/supabase'
+import Input from '@/components/Input'
 
 const Profil = () => {
   const router = useRouter()
   const { user, loading, logout, setUser } = useAuth()
 
   const [name, setName] = useState('')
-  const [saving, setSaving] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const [enableSaving, setEnableSaving] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
 
   // 🧭 Redirect & initialize user's display name
@@ -34,10 +35,15 @@ const Profil = () => {
     await logout()
   }, [logout, router])
 
+  const handleName = (value: string) => {
+    setEnableSaving(value !== name)
+    setName(value)
+  }
+
   const handleSave = useCallback(async () => {
     if (!user) return
 
-    setSaving(true)
+    setIsSaving(false)
     setMessage(null)
 
     try {
@@ -48,7 +54,7 @@ const Profil = () => {
       if (!session?.user) throw new Error('No active session')
 
       const { error } = await supabase
-        .from('profiles')
+        .from('users')
         .update({
           full_name: name,
           updated_at: new Date().toISOString(),
@@ -67,78 +73,80 @@ const Profil = () => {
       console.error('Error updating profile:', e)
       setMessage('Error saving settings')
     } finally {
-      setSaving(false)
+      setIsSaving(false)
     }
   }, [name, user, setUser])
 
   if (loading) {
     return (
-      <div className={styles.pageContainerContainer}>
-        <div className={styles.pageContainerWrapper}>
-          <div className={styles.loadingContainer}>Loading...</div>
+      <div className="flex items-center justify-center w-full h-screen">
+        <div className="flex flex-col items-center justify-between w-full max-w-[1220px] h-full">
+          <div className="p-4">Loading...</div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className={styles.pageContainerContainer}>
-      <div className={styles.pageContainerWrapper}>
-        <div className={styles.pageContainer_body}>
-          <div className={styles.profil}>
-            <div className={styles.profil_header}>
-              <h1 className={styles.profil_title}>Profil</h1>
+    <div className="flex items-center justify-center w-full h-screen">
+      <div className="flex flex-col items-center justify-between w-full max-w-[1220px] h-full">
+        <div className="flex flex-col relative items-start justify-start w-full flex-1 overflow-hidden gap-8 px-4 pt-4 md:gap-3">
+          <div className="w-full h-full flex flex-col items-center justify-start px-4 gap-6 z-[1000] bg-gray-100 text-gray-800">
+            <div className="flex items-start justify-between w-full">
+              <h1 className="font-bold max-w-[80%]">Profil</h1>
               <div
-                className={styles.profil_close}
+                className="p-3 cursor-pointer"
                 onClick={() => router.history.back()}
               >
                 <img src={glyph} alt="Close icon" />
               </div>
             </div>
 
-            <div className={styles.container}>
-              <div className={styles.spaceY6}>
-                <div>
-                  <label className={styles.label}>Email</label>
-                  <input
-                    type="text"
-                    value={user?.email ?? ''}
-                    disabled
-                    className={styles.inputDisabled}
-                  />
-                </div>
+            <div className=" flex flex-col gap-4 w-full">
+              <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4">
+                  <h2>Informations</h2>
+                  <div>
+                    <label className="block mb-1 font-bold">Email</label>
+                    <p>{user?.email || ''}</p>
+                  </div>
 
-                <div>
-                  <label className={styles.label}>Display Name</label>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className={styles.inputName}
-                  />
-                </div>
+                  <div>
+                    <label className="block mb-1 font-bold">Display Name</label>
+                    <Input
+                      value={name}
+                      type={'text'}
+                      placeholder={''}
+                      onChange={(e) => handleName(e.target.value)}
+                    />
+                  </div>
 
-                <div className={styles.saveRow}>
-                  <Button onClick={handleSave} disabled={saving}>
-                    {saving ? 'Saving...' : 'Save Changes'}
-                  </Button>
-
-                  {message && (
-                    <span
-                      className={
-                        message.includes('Error')
-                          ? styles.messageError
-                          : styles.messageSuccess
-                      }
+                  <div className="flex items-center gap-4">
+                    <Button
+                      variant="primary"
+                      onClick={handleSave}
+                      disabled={!enableSaving || isSaving}
                     >
-                      {message}
-                    </span>
-                  )}
+                      {isSaving ? 'Saving...' : 'Save Changes'}
+                    </Button>
+
+                    {message && (
+                      <span
+                        className={
+                          message.includes('Error')
+                            ? 'text-status-error'
+                            : 'text-status-success'
+                        }
+                      >
+                        {message}
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div>
-                  <label className={styles.label}>A propos</label>
+                  <h2 className="mb-4">A propos</h2>
                   <Button
-                    variant="primary"
+                    variant="info"
                     onClick={() =>
                       router.navigate({ to: '/about', replace: false })
                     }
@@ -147,14 +155,10 @@ const Profil = () => {
                   </Button>
                 </div>
 
-                <div className={styles.dangerZone}>
-                  <h3 className={styles.dangerTitle}>Danger Zone</h3>
+                <div>
+                  <h2 className="mb-4 text-status-error">Danger Zone</h2>
 
-                  <Button
-                    variant="secondary"
-                    onClick={handleLogout}
-                    className={styles.logoutBtn}
-                  >
+                  <Button variant="error" onClick={handleLogout}>
                     <span>Log out</span>
                     <LogOut />
                   </Button>

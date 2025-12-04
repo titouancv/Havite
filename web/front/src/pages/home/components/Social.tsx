@@ -1,9 +1,8 @@
 import { SquareArrowDown, SquareArrowUp } from 'lucide-react'
-import styles from './social.module.scss'
 import { useAuth } from '@/hooks/useAuth'
 import { useRecapVote } from '@/hooks/useRecapVote'
 import { useRouter } from '@tanstack/react-router'
-import Button from '@/components/button/Button'
+import Button from '@/components/Button'
 
 // Map categories to icons
 
@@ -14,10 +13,8 @@ type RecapCardProps = {
 function Social({ recapId }: RecapCardProps) {
   const { user } = useAuth()
 
-  const { upVotes, downVotes, userVote, toggleUpvote, toggleDownvote } = useRecapVote(
-    recapId,
-    user?.id
-  )
+  const { upVotes, downVotes, userVote, toggleUpvote, toggleDownvote } =
+    useRecapVote(recapId, user?.id)
 
   const router = useRouter()
 
@@ -50,22 +47,24 @@ function Social({ recapId }: RecapCardProps) {
   }
 
   return (
-    <div className={styles.social}>
+    <div className="flex flex-row items-center gap-4 mt-2">
       <Button
-        className={`${styles.actionButton} ${userVote === 1 ? styles.active : ''}`}
         onClick={handleUpvote}
         type="button"
+        size="small"
+        variant={userVote === 1 ? 'primary' : 'secondary'}
       >
-        <SquareArrowUp size={16} className={userVote === 1 ? styles.filledIcon : ''} />
-        <span className={styles.voteCount}>{upVotes}</span>
+        <SquareArrowUp size={16} />
+        <span className="text-sm ml-1">{upVotes}</span>
       </Button>
       <Button
-        className={`${styles.actionButton} ${userVote === -1 ? styles.active : ''}`}
         onClick={handleDownvote}
         type="button"
+        size="small"
+        variant={userVote === -1 ? 'primary' : 'secondary'}
       >
-        <SquareArrowDown size={16} className={userVote === -1 ? styles.filledIcon : ''} />
-        <span className={styles.voteCount}>{downVotes}</span>
+        <SquareArrowDown size={16} />
+        <span className="text-sm ml-1">{downVotes}</span>
       </Button>
     </div>
   )

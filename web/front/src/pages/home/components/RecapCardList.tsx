@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
-import styles from './recap-card-list.module.scss'
 import type { RecapOverview } from '@/types'
-import RecapCard from '../recap-card/RecapCard'
+import RecapCard from './RecapCard'
 
 interface RecapCardListProps {
   recapOverviews: RecapOverview[]
@@ -40,11 +39,14 @@ const RecapCardList: React.FC<RecapCardListProps> = ({
   }, [fetchNextPage, hasNextPage])
 
   return (
-    <div className={styles.latestNews}>
+    <div className="flex flex-col items-center justify-start w-full flex-1 overflow-y-auto pb-4">
       {recapOverviews.map((recapOverview) => (
         <RecapCard key={recapOverview.id} recap={recapOverview} />
       ))}
-      <div ref={observerTarget} className={styles.loadingTrigger}>
+      <div
+        ref={observerTarget}
+        className="w-full text-center p-4 text-gray-800 min-h-5"
+      >
         {isFetchingNextPage && <p>Chargement...</p>}
       </div>
     </div>

@@ -1,12 +1,15 @@
 import React from 'react'
-import styles from './tag-component.module.scss'
 
 interface TagComponentProps {
   content: string
 }
 
 const TagComponent: React.FC<TagComponentProps> = ({ content }) => {
-  return <div className={styles.tagComponent}>{content}</div>
+  return (
+    <div className="flex items-center justify-center px-2 py-1 text-gray-100 text-xs bg-status-info rounded-2xl">
+      {content}
+    </div>
+  )
 }
 
 export default TagComponent

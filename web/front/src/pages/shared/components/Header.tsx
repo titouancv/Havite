@@ -1,8 +1,7 @@
-import styles from './header.module.scss'
 import logoMonogram from '@/assets/logoMonogram.svg'
 import { Link, useRouter } from '@tanstack/react-router'
 import { useAuth } from '@/hooks/useAuth'
-import Button from '@/components/button/Button'
+import Button from '@/components/Button'
 
 function Header() {
   const { user } = useAuth()
@@ -18,24 +17,24 @@ function Header() {
   }
 
   return (
-    <header className={styles.headerContainer}>
+    <header className="flex w-full gap-2 items-center justify-center px-4 py-2">
       <Link to="/">
-        <div className={styles.homeButton}>
-          <img className={styles.logo} src={logoMonogram} alt="Havite logo" />
-          <h1>HAVITE</h1>
+        <div className="flex gap-2 items-center justify-center">
+          <img className="w-10 h-10" src={logoMonogram} alt="Havite logo" />
+          <h1 className="font-bold">HAVITE</h1>
         </div>
       </Link>
-      <div className={styles.authContainer}>
+      <div className="ml-auto">
         {user ? (
           <Button onClick={goProfil}>
             {user.avatarUrl && (
               <img
                 src={user.avatarUrl}
                 alt={user.name}
-                className={styles.avatarImg}
+                className="h-8 w-8 rounded-full object-cover sm:mr-1 mr-0"
               />
             )}
-            <div className={styles.userName}>{user.name}</div>
+            <div className="hidden sm:block">{user.name}</div>
           </Button>
         ) : (
           <Button variant="primary" onClick={() => goLogin()}>

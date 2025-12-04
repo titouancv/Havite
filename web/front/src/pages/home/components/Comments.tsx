@@ -1,13 +1,12 @@
 import { useState, useMemo } from 'react'
-import { useAuth } from '../../../../hooks/useAuth'
+import { useAuth } from '../../../hooks/useAuth'
 import {
   useAddComment,
   useFetchComments,
-} from '../../../../services/comments.services'
-import ButtonComponent from '../../../../components/button/ButtonComponent'
-import styles from './comments.module.scss'
+} from '../../../services/comments.services'
+import Button from '../../../components/Button'
 import { Link } from '@tanstack/react-router'
-import { formatDate } from '../../../../utils/date'
+import { formatDate } from '../../../utils/date'
 import type { Comment } from '@/types'
 import { MessageSquareReply, X } from 'lucide-react'
 
@@ -46,40 +45,49 @@ const CommentItem: React.FC<CommentItemProps> = ({
   }
 
   return (
-    <div className={styles.commentContainer}>
-      <div className={styles.comment}>
-        <div className={styles.content}>
-          <div className={styles.header}>
-            <span className={styles.author}>
+    <div className="flex flex-col gap-2">
+      <div className="flex gap-2">
+        <div className="flex-1 bg-gray-200 p-2 rounded-lg">
+          <div className="flex justify-between mb-1">
+            <span className="font-semibold text-sm">
               {comment.user?.name || 'Utilisateur inconnu'}
             </span>
-            <span className={styles.date}>{formatDate(comment.createdAt)}</span>
+            <span className="text-xs text-gray-600">
+              {formatDate(comment.createdAt)}
+            </span>
           </div>
-          <p>{comment.content}</p>
+          <p className="m-0 text-[0.95rem] leading-snug whitespace-pre-wrap">
+            {comment.content}
+          </p>
           {user && (
-            <div className={styles.actions}>
-              <button onClick={() => setIsReplying(!isReplying)}>
+            <div className="mt-1 flex justify-end gap-2">
+              <button
+                className="bg-transparent border-none text-gray-600 text-xs cursor-pointer p-0 hover:text-primary-300 hover:underline"
+                onClick={() => setIsReplying(!isReplying)}
+              >
                 {isReplying ? <X /> : <MessageSquareReply />}
               </button>
             </div>
           )}
 
           {isReplying && (
-            <form className={styles.commentForm} onSubmit={handleReplySubmit}>
-              <div className={styles.inputWrapper}>
+            <form className="flex gap-2" onSubmit={handleReplySubmit}>
+              <div className="flex-1 flex flex-col gap-1 border border-gray-400 rounded-lg p-2">
                 <textarea
+                  className="w-full min-h-[80px] p-2 resize-y font-inherit text-gray-800 focus:outline-none focus:border-primary-300"
                   value={replyContent}
                   onChange={(e) => setReplyContent(e.target.value)}
                   placeholder="Votre réponse..."
                   disabled={isSubmitting}
                   autoFocus
                 />
-                <ButtonComponent
+                <Button
                   type="submit"
                   variant="primary"
                   disabled={!replyContent.trim() || isSubmitting}
-                  content={isSubmitting ? 'Envoi...' : 'Répondre'}
-                />
+                >
+                  {isSubmitting ? 'Envoi...' : 'Répondre'}
+                </Button>
               </div>
             </form>
           )}
@@ -87,7 +95,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
       </div>
 
       {comment.replies && comment.replies.length > 0 && (
-        <div className={styles.repliesList}>
+        <div className="ml-8 flex flex-col gap-2 border-l-2 border-gray-300 pl-4">
           {comment.replies.map((reply) => (
             <CommentItem
               key={reply.id}
@@ -176,40 +184,43 @@ const Comments: React.FC<CommentsProps> = ({ recapId }) => {
   }
 
   return (
-    <div className={styles.commentsSection}>
-      <h2>Commentaires</h2>
+    <div className="pt-6 w-full">
+      <h2 className="mb-4 font-bold">Commentaires</h2>
 
       {user ? (
-        <form
-          className={styles.commentForm}
-          onSubmit={handleSubmit}
-          style={{ marginBottom: '12px' }}
-        >
-          <div className={styles.inputWrapper}>
+        <form className="flex gap-2 mb-3" onSubmit={handleSubmit}>
+          <div className="flex-1 flex flex-col gap-1 border border-gray-400 rounded-lg p-2">
             <textarea
+              className="w-full min-h-[80px] p-2 resize-y font-inherit text-gray-800 focus:outline-none focus:border-primary-300"
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Ajouter un commentaire..."
               disabled={addCommentMutation.isPending}
             />
-            <ButtonComponent
+            <Button
               type="submit"
               variant="primary"
               disabled={!newComment.trim() || addCommentMutation.isPending}
-              content={addCommentMutation.isPending ? 'Envoi...' : 'Publier'}
-            />
+            >
+              {addCommentMutation.isPending ? 'Envoi...' : 'Publier'}
+            </Button>
           </div>
         </form>
       ) : (
-        <div className={styles.loginPrompt}>
+        <div className="mb-6 p-4 bg-gray-200 rounded-lg text-center">
           <p>
-            <Link to="/login">Connectez-vous</Link> pour participer à la
-            discussion.
+            <Link
+              to="/login"
+              className="text-primary-300 underline cursor-pointer"
+            >
+              Connectez-vous
+            </Link>{' '}
+            pour participer à la discussion.
           </p>
         </div>
       )}
 
-      <div className={styles.commentsList}>
+      <div className="flex flex-col gap-4">
         {commentTree.map((comment) => (
           <CommentItem
             key={comment.id}
