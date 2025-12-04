@@ -33,11 +33,9 @@ export default function RecapView({ params }: RecapViewProps) {
 
   const [isImageValid, setIsImageValid] = useState(true);
 
-  const categoryName = String(
-    recap?.article?.category
-      ? CATEGORIES[recap?.article?.category]
-      : "Actualité"
-  );
+  const categoryName = recap?.article?.category
+    ? CATEGORIES[recap?.article?.category].label
+    : "Actualité";
 
   if (isLoading) {
     return (
