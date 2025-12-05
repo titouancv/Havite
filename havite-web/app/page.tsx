@@ -61,7 +61,7 @@ function Home() {
 
   return (
     <div className="flex flex-col items-start justify-start gap-4 w-full h-full overflow-hidden">
-      <h1 className="font-bold">Quoi de neuf ?</h1>
+      <h1 className="font-bold hidden md:block">Quoi de neuf ?</h1>
       <Input
         type="text"
         placeholder="Rechercher un sujet..."

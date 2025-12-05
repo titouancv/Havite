@@ -1,6 +1,6 @@
 import { useAuth } from "@/lib/hooks/useAuth";
 import { useRecapVote } from "@/lib/hooks/useRecapVote";
-import { SquareArrowDown, SquareArrowUp } from "lucide-react";
+import { MessageCircle, SquareArrowDown, SquareArrowUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Button from "./ui/Button";
 
@@ -65,6 +65,17 @@ function Social({ recapId }: RecapCardProps) {
       >
         <SquareArrowDown size={16} />
         <span className="text-sm ml-1">{downVotes}</span>
+      </Button>
+      <Button
+        onClick={(e) => {
+          e.stopPropagation();
+          router.push(`/${recapId}?comments=true`);
+        }}
+        type="button"
+        size="small"
+        variant="transparent"
+      >
+        <MessageCircle size={16} />
       </Button>
     </div>
   );

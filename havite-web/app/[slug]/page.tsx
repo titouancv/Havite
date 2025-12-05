@@ -7,9 +7,11 @@ import Social from "@/components/Social";
 import MessageInfoBoxComponent from "@/components/ui/MessageInfoBox";
 import Sources from "@/components/Sources";
 import Comments from "@/components/Comments";
+import ImageViewer from "@/components/ImageViewer";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import glyph from "../../assets/glyph.svg";
+import Button from "@/components/ui/Button";
 
 interface RecapViewProps {
   params: Promise<{ slug: string }>;
@@ -20,6 +22,8 @@ export default function RecapView({ params }: RecapViewProps) {
   const [recap, setRecap] = useState<Recap | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const scrollToComments = searchParams.get("comments") === "true";
 
   useEffect(() => {
     if (!slug) return;
@@ -28,6 +32,16 @@ export default function RecapView({ params }: RecapViewProps) {
       .catch((error) => console.error("Error fetching recap:", error))
       .finally(() => setIsLoading(false));
   }, [slug]);
+
+  useEffect(() => {
+    if (!isLoading && scrollToComments) {
+      setTimeout(() => {
+        document
+          .getElementById("comments")
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  }, [isLoading, scrollToComments]);
 
   const imageUrl = recap?.article?.imageUrl || undefined;
 
@@ -60,7 +74,7 @@ export default function RecapView({ params }: RecapViewProps) {
 
   return (
     <div
-      className={`w-full h-full flex flex-col items-center justify-start gap-6`}
+      className={`w-full h-full flex flex-col items-center justify-start gap-2 md:gap-6`}
     >
       <div className="flex items-start justify-between w-full">
         <h1
@@ -70,9 +84,9 @@ export default function RecapView({ params }: RecapViewProps) {
         >
           {recap?.article.title}
         </h1>
-        <div className="p-3 cursor-pointer" onClick={router.back}>
+        <Button variant="transparent" onClick={router.back}>
           <Image src={glyph} alt="Close icon" />
-        </div>
+        </Button>
       </div>
       <div
         className="flex-1 w-full overflow-y-auto pb-4"
@@ -80,12 +94,12 @@ export default function RecapView({ params }: RecapViewProps) {
       >
         <div className="grid md:grid-cols-[60%_35%] items-start justify-between w-full grid-cols-1 md:gap-6">
           {isImageValid && imageUrl && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <ImageViewer
               src={imageUrl}
               alt=""
               className="col-span-full w-full h-[250px] object-cover rounded mb-4"
               onError={() => setIsImageValid(false)}
+              description={recap?.article.title}
             />
           )}
           <div className="flex flex-col items-start justify-start gap-4">

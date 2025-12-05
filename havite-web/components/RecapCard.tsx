@@ -4,6 +4,7 @@ import Social from "./Social";
 import { useRouter } from "next/navigation";
 import { CATEGORIES, RecapOverview } from "@/types";
 import { formatDate } from "@/lib/date";
+import ImageViewer from "./ImageViewer";
 // Map categories to icons
 
 type RecapCardProps = {
@@ -25,7 +26,7 @@ function RecapCard({ recap }: RecapCardProps) {
 
   return (
     <div
-      className="flex flex-row items-start gap-3 w-full p-3 rounded-none bg-transparent cursor-pointer text-left border-none border-b border-gray-300 transition-colors text-gray-800 hover:bg-gray-200 hover:text-gray-900"
+      className="flex flex-row items-start gap-3 w-full py-3 rounded-none bg-transparent cursor-pointer text-left border-none border-b border-gray-300 transition-colors text-gray-800 hover:bg-gray-200 hover:text-gray-900"
       onClick={handleClick}
       aria-label={`Voir le récapitulatif : ${recap.title}`}
     >
@@ -58,11 +59,12 @@ function RecapCard({ recap }: RecapCardProps) {
             {recap.summary}
           </p>
           {isImageValid && (
-            <div className="w-2/5 rounded overflow-hidden border border-gray-400 mt-2">
-              <img
+            <div className="w-full md:w-2/5 rounded overflow-hidden border border-gray-400 mt-2">
+              <ImageViewer
                 src={recap.imageUrl}
                 alt=""
                 className="w-full h-auto max-h-[150px] object-cover block"
+                description={recap.summary}
                 onError={() => setIsImageValid(false)}
               />
             </div>
