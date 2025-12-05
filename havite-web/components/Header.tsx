@@ -30,7 +30,7 @@ function Header() {
       </Link>
       <div className="ml-auto">
         {user ? (
-          <Button onClick={goProfil}>
+          <Button onClick={goProfil} variant="transparent">
             {user.avatarUrl && (
               <img
                 src={user.avatarUrl}

@@ -93,13 +93,13 @@ const Profil = () => {
   return (
     <div className="flex items-center justify-center w-full h-screen">
       <div className="flex flex-col items-center justify-between w-full max-w-[1220px] h-full">
-        <div className="flex flex-col relative items-start justify-start w-full flex-1 overflow-hidden gap-8 px-4 pt-4 md:gap-3">
+        <div className="flex flex-col relative items-start justify-start w-full flex-1 overflow-hidden gap-8 pt-4 md:gap-3">
           <div className="w-full h-full flex flex-col items-center justify-start gap-6 ">
             <div className="flex items-start justify-between w-full">
               <h1 className="font-bold max-w-[80%]">Profil</h1>
-              <div className="p-3 cursor-pointer" onClick={router.back}>
+              <Button variant="transparent" onClick={router.back}>
                 <Image src={glyph} alt="Close icon" />
-              </div>
+              </Button>
             </div>
 
             <div className=" flex flex-col gap-4 w-full">

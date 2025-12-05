@@ -54,7 +54,7 @@ function RecapCard({ recap }: RecapCardProps) {
         </div>
 
         <div className="flex flex-col gap-3">
-          <p className="text-base text-gray-800 leading-normal m-0 break-words">
+          <p className="text-base text-gray-800 leading-normal m-0 break-words whitespace-pre-line">
             {recap.summary}
           </p>
           {isImageValid && (

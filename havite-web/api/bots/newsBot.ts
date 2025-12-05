@@ -7,11 +7,11 @@ type NewsBotResult =
   | { success: false; reason: string };
 
 export async function createNewRecap(
-  lastTitle?: string
+  lastSummary?: string
 ): Promise<NewsBotResult> {
   // 1. Récupérer l'article via Perplexity
   console.log("Fetching article from Perplexity...");
-  const perplexityData = await perplexityResult(lastTitle);
+  const perplexityData = await perplexityResult(lastSummary);
   console.log("Perplexity data received:", perplexityData);
 
   // Vérifier si c'est un fallback
@@ -102,7 +102,7 @@ export async function createNewRecap(
     const { data: media, error: mediaError } = await supabase
       .from("media")
       .select("id")
-      .eq("label", source.mediaName)
+      .eq("name", source.mediaName)
       .single();
 
     if (mediaError || !media) {
@@ -129,10 +129,10 @@ export async function createNewRecap(
 }
 
 // Fonction pour récupérer le dernier titre (pour éviter les doublons)
-export async function getLastRecapTitle(): Promise<string | undefined> {
+export async function getLastRecapSummary(): Promise<string | undefined> {
   const { data, error } = await supabase
     .from("article")
-    .select("title")
+    .select("summary")
     .order("created_at", { ascending: false })
     .limit(1)
     .single();
@@ -141,15 +141,15 @@ export async function getLastRecapTitle(): Promise<string | undefined> {
     return undefined;
   }
 
-  return data.title;
+  return data.summary;
 }
 
 // Fonction principale pour le bot
 export async function runNewsBot(): Promise<NewsBotResult> {
   console.log("Running News Bot...");
-  const lastTitle = await getLastRecapTitle();
-  console.log("Last recap title:", lastTitle);
-  const newArticle = await createNewRecap(lastTitle);
+  const lastSummary = await getLastRecapSummary();
+  console.log("Last recap title:", lastSummary);
+  const newArticle = await createNewRecap(lastSummary);
   console.log("New article created:", newArticle);
   return newArticle;
 }

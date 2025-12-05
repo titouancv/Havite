@@ -32,6 +32,11 @@ export default function RecapView({ params }: RecapViewProps) {
   const imageUrl = recap?.article?.imageUrl || undefined;
 
   const [isImageValid, setIsImageValid] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    setIsScrolled(e.currentTarget.scrollTop > 20);
+  };
 
   const categoryName = recap?.article?.category
     ? CATEGORIES[recap?.article?.category].label
@@ -58,14 +63,21 @@ export default function RecapView({ params }: RecapViewProps) {
       className={`w-full h-full flex flex-col items-center justify-start gap-6`}
     >
       <div className="flex items-start justify-between w-full">
-        <h1 className="font-bold max-w-[80%] sm:text-xl">
+        <h1
+          className={`font-bold max-w-[80%] text-base sm:text-xl transition-all duration-300 ease-in-out ${
+            isScrolled ? "line-clamp-2 opacity-90" : "opacity-100"
+          }`}
+        >
           {recap?.article.title}
         </h1>
         <div className="p-3 cursor-pointer" onClick={router.back}>
           <Image src={glyph} alt="Close icon" />
         </div>
       </div>
-      <div className="flex-1 w-full overflow-y-auto pb-4">
+      <div
+        className="flex-1 w-full overflow-y-auto pb-4"
+        onScroll={handleScroll}
+      >
         <div className="grid md:grid-cols-[60%_35%] items-start justify-between w-full grid-cols-1 md:gap-6">
           {isImageValid && imageUrl && (
             // eslint-disable-next-line @next/next/no-img-element

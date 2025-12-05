@@ -5,8 +5,6 @@ import { CATEGORIES, RecapOverview } from "@/types";
 import { fetchAllRecapsOverview } from "@/api/recap";
 import RecapCardList from "@/components/RecapCardList";
 import Input from "@/components/ui/Input";
-import Button from "@/components/ui/Button";
-import { runNewsBot } from "@/api/bots/newsBot";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -99,10 +97,6 @@ function Home() {
           </button>
         ))}
       </div>
-
-      <Button variant="primary" onClick={runNewsBot}>
-        {"Nouvel article"}
-      </Button>
       <RecapCardList
         recapOverviews={filteredRecaps}
         fetchNextPage={fetchNextPage}

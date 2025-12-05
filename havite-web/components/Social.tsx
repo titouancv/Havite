@@ -52,7 +52,7 @@ function Social({ recapId }: RecapCardProps) {
         onClick={handleUpvote}
         type="button"
         size="small"
-        variant={userVote === 1 ? "primary" : "secondary"}
+        variant={userVote === 1 ? "primary" : "transparent"}
       >
         <SquareArrowUp size={16} />
         <span className="text-sm ml-1">{upVotes}</span>
@@ -61,7 +61,7 @@ function Social({ recapId }: RecapCardProps) {
         onClick={handleDownvote}
         type="button"
         size="small"
-        variant={userVote === -1 ? "primary" : "secondary"}
+        variant={userVote === -1 ? "primary" : "transparent"}
       >
         <SquareArrowDown size={16} />
         <span className="text-sm ml-1">{downVotes}</span>

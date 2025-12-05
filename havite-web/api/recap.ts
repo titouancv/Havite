@@ -1,19 +1,9 @@
 import { supabase, type DBRecap } from "@/lib/supabase";
-import { MOCK_RECAPS_DATA, MOCK_RECAPS_OVERVIEW } from "@/mocks/data";
 import { Article, Recap, RecapOverview } from "@/types";
-
-const USE_MOCK_DATA = process.env.NEXT_PUBLIC_USE_MOCK_DATA === "true";
 
 /* ------------------------- Fetch recap by ID ------------------------- */
 
 export async function fetchRecapById(recapId: string): Promise<Recap> {
-  if (USE_MOCK_DATA) {
-    const mockRecap = MOCK_RECAPS_DATA.find((r) => r.id === recapId);
-    if (!mockRecap) throw new Error("Recap not found (mock)");
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    return mockRecap;
-  }
-
   const { data, error } = await supabase
     .from("recap")
     .select(
@@ -118,14 +108,6 @@ export async function fetchAllRecapsOverview(
   pageParam?: string,
   limit = 10
 ): Promise<FetchRecapsResult> {
-  if (USE_MOCK_DATA) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    return {
-      items: MOCK_RECAPS_OVERVIEW,
-      nextCursor: undefined,
-    };
-  }
-
   let query = supabase
     .from("article")
     .select(

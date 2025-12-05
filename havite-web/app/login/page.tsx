@@ -19,10 +19,6 @@ const Login = () => {
 
   const router = useRouter();
 
-  const goBack = () => {
-    router.back();
-  };
-
   return (
     <div className="flex items-center justify-center w-full h-screen">
       <div className="flex flex-col items-center justify-between w-full max-w-[1220px] h-full">
@@ -30,9 +26,9 @@ const Login = () => {
           <div className="w-full h-full flex flex-col items-center justify-start gap-6">
             <div className="flex items-start justify-between w-full">
               <h1 className="font-bold max-w-[80%]">Se connecter</h1>
-              <div className="p-3 cursor-pointer" onClick={goBack}>
+              <Button variant="transparent" onClick={router.back}>
                 <Image src={glyph} alt="Close icon" />
-              </div>
+              </Button>
             </div>
             <div className="p-4 flex flex-col gap-4">
               <p>Connectez-vous ou créer votre compte Havite</p>
