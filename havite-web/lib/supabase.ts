@@ -14,6 +14,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export interface DBMedia {
   id: string;
   name: string;
+  label: string;
   url: string;
   logo_url: string;
 }

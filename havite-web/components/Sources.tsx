@@ -18,7 +18,7 @@ const Sources: React.FC<SourcesProps> = ({ sources = [] }) => {
           key={index}
           className="flex items-center justify-between w-full border-b border-gray-400 py-3 last:border-b-0"
         >
-          <p>{source.media.name}</p>
+          <p>{source.media.label}</p>
           <Button variant="primary" onClick={() => openSourceLink(source.url)}>
             {"Voir l'article"}
           </Button>

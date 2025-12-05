@@ -37,6 +37,7 @@ export async function fetchRecapById(recapId: string): Promise<Recap> {
         media:media_id (
           id,
           name,
+          label,
           url,
           logo_url
         )
@@ -79,6 +80,7 @@ export async function fetchRecapById(recapId: string): Promise<Recap> {
       ? {
           id: s.media.id,
           name: s.media.name,
+          label: s.media.label,
           url: s.media.url,
           logoUrl: s.media.logo_url,
         }
