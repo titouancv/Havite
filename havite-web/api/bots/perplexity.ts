@@ -91,17 +91,17 @@ export const perplexityResult = async (
     - Mediapart (mediapart) -> Domain MUST be *mediapart.fr*
 
     ### OBJECTIVE
-    Identify the single most significant news event published within the **last hour**.
+    Identify the single most significant news event published within the **last day**.
 
     ### CRITERIA & CONSTRAINTS
-    1. **Freshness:** The article MUST have been published less than hour ago.
+    1. **Freshness:** The article MUST have been published less than one day ago.
     2. **Uniqueness/Exclusion (CRITICAL):** The resulting article MUST cover a fundamentally different topic, scope, or event than the one provided in the "Last Reported News". If the only fresh news found is related to the previous title, you **MUST** return the fallback object. Do not risk topic repetition.
-    3. **Accuracy:** Do not hallucinate. If no news meets the <1hour criteria or the Uniqueness criteria, return the Fallback object.
+    3. **Accuracy:** Do not hallucinate. If no news meets the <1day criteria or the Uniqueness criteria, return the Fallback object.
     4. **Content:** The summary must be detailed (approx 15 sentences), factual, and journalistic in tone.
 
     ### OUTPUT LOGIC
-    - If a valid article <1hour is found: Return the 'article' object with the 'sources' array.
-    - If NO article <1hour is found: Return the 'fallback' object.
+    - If a valid article <1day is found: Return the 'article' object with the 'sources' array.
+    - If NO article <1day is found: Return the 'fallback' object.
   `;
 
   // Section modifiée du User Prompt
@@ -111,7 +111,7 @@ export const perplexityResult = async (
 
     ### MISSION
     1. Search the authorized French media for the latest articles.
-    2. Filter for items published in the last hour.
+    2. Filter for items published in the last day.
     3. Select the most important news item. **CRITICAL: This item MUST be on a completely distinct and separate topic from the "Last Reported News".**
     4. Generate the JSON response.
 `;
