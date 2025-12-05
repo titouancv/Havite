@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { perplexityResult } from "./perplexity";
 import { mistralResult } from "./mistral";
+import { runTwitterBot } from "./twitter";
 
 type NewsBotResult =
   | { success: true; recapId: string }
@@ -95,6 +96,20 @@ export async function createNewRecap(
   }
 
   const recapId = recapData.id;
+
+  // Ne pas poster sur Twitter entre 22h et 8h heure française
+  const now = new Date();
+  const franceHour = new Date(
+    now.toLocaleString("en-US", { timeZone: "Europe/Paris" })
+  ).getHours();
+
+  if (franceHour >= 8 && franceHour < 22) {
+    runTwitterBot(summary, recapId);
+  } else {
+    console.log(
+      `Twitter post skipped (current hour in France: ${franceHour}h)`
+    );
+  }
 
   // 5. Insérer les sources
   for (const source of sources) {
