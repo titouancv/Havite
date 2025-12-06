@@ -63,7 +63,7 @@ function RecapCard({ recap }: RecapCardProps) {
               <ImageViewer
                 src={recap.imageUrl}
                 alt=""
-                className="w-full h-auto max-h-[150px] object-cover block"
+                className="w-full h-auto max-h-[200px] object-cover block"
                 description={recap.summary}
                 onError={() => setIsImageValid(false)}
               />

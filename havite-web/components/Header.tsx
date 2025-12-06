@@ -24,7 +24,11 @@ function Header() {
     <header className="flex w-full gap-2 items-center justify-center px-4 py-2">
       <Link href="/">
         <div className="flex gap-2 items-center justify-center">
-          <Image className="w-10 h-10" src={logoMonogram} alt="Havite logo" />
+          <Image
+            className="size-8 md:size-10"
+            src={logoMonogram}
+            alt="Havite logo"
+          />
           <h1 className="font-bold">HAVITE</h1>
         </div>
       </Link>
