@@ -1,58 +1,81 @@
 # Havite
 
-Havite est une plateforme d'agrégation et de récapitulatif d'actualités technologiques, propulsée par l'intelligence artificielle.
+Havite is an AI-powered tech news aggregation and summarization platform.
 
-## Structure du Projet
+## Project Structure
 
-Le projet est organisé en monorepo avec les dossiers suivants :
+The project is organized as a monorepo with the following folders:
 
-- **`web/front`** : Application Frontend (React, Vite, TanStack Router/Query).
-- **`web/services`** : Backend API (Next.js, tRPC, Prisma).
-- **`news-bot`** : Bot de scraping et de génération de contenu (Node.js, OpenAI/Google GenAI).
+- **`havite-web/`**: Full-stack web application (Next.js 16, React 19, Tailwind CSS, Supabase).
+- **`bots/`**: News scraping and content generation bot (Cloudflare Workers, Mistral AI, Supabase).
 
-## Prérequis
+## Prerequisites
 
-- Node.js (v20+ recommandé)
+- Node.js (v20+ recommended)
 - npm (v10+)
-- Une base de données PostgreSQL (pour le backend)
+- Supabase account (for database and authentication)
+- Cloudflare account (for Workers deployment)
 
 ## Installation
 
-À la racine du projet, installez toutes les dépendances :
+Install dependencies for each package:
 
 ```bash
+# Web application
+cd havite-web
+npm install
+
+# Bots
+cd bots
 npm install
 ```
 
-## Commandes Disponibles
+## Available Commands
 
-### Développement
+### Development
 
-- **Lancer tout (non implémenté, lancer séparément pour l'instant)**
-- **Frontend** : `npm run dev:front`
-- **Backend** : `npm run dev:services`
-- **Bot** : `npm run dev:bot`
+- **Web App**: `cd havite-web && npm run dev`
+- **Bots**: `cd bots && npm run dev`
 
-### Build & Lint
+### Build & Deploy
 
-- **Build tout** : `npm run build:all`
-- **Lint tout** : `npm run lint:all`
+- **Build Web**: `cd havite-web && npm run build`
+- **Deploy Bots**: `cd bots && npm run deploy`
 
 ## Configuration
 
-### Backend (`web/services`)
-Créez un fichier `.env` dans `web/services` avec :
+### Web App (`havite-web`)
+
+Create a `.env.local` file in `havite-web` with:
+
 ```env
-DATABASE_URL="postgresql://user:password@localhost:5432/havite"
+NEXT_PUBLIC_SUPABASE_URL="your-supabase-url"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
+MISTRAL_API_KEY="your-mistral-api-key"
+PERPLEXITY_API_KEY="your-perplexity-api-key"
 ```
 
-### Bot (`news-bot`)
-Créez un fichier `.env` dans `news-bot` avec vos clés API (OpenAI, Twitter, etc.).
+### Bots (`bots`)
 
-## Contribution
+Configure your Cloudflare Workers secrets via `wrangler secret put`:
 
-1. Forkez le projet
-2. Créez votre branche (`git checkout -b feature/AmazingFeature`)
-3. Committez vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. Pushez vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrez une Pull Request
+- `SUPABASE_URL`
+- `SUPABASE_KEY`
+- `MISTRAL_API_KEY`
+
+## Tech Stack
+
+- **Frontend**: Next.js 16, React 19, Tailwind CSS
+- **Backend**: Next.js API Routes, Vercel AI SDK
+- **Database**: Supabase (PostgreSQL)
+- **AI**: Mistral AI, Perplexity AI
+- **Bots**: Cloudflare Workers (scheduled tasks)
+- **Authentication**: Supabase Auth
+
+## Contributing
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request

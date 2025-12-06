@@ -3,20 +3,17 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "web/front",
-    "web/services",
-    "news-bot"
+    "havite-web",
+    "bots"
   ],
   "scripts": {
     "install:all": "npm install",
-    "dev:front": "npm run dev --workspace=front",
-    "dev:services": "npm run dev --workspace=services",
-    "dev:bot": "npm run dev --workspace=news-scrapper",
-    "build:front": "npm run build --workspace=front",
-    "build:services": "npm run build --workspace=services",
-    "build:all": "npm run build --workspaces",
-    "lint:all": "npm run lint --workspaces",
-    "test:all": "npm run test --workspaces --if-present"
+    "dev:web": "npm run dev --workspace=havite-web",
+    "dev:bots": "npm run dev --workspace=bots",
+    "build:web": "npm run build --workspace=havite-web",
+    "deploy:bots": "npm run deploy --workspace=bots",
+    "build:all": "npm run build --workspaces --if-present",
+    "lint:all": "npm run lint --workspaces --if-present"
   },
   "devDependencies": {
     "concurrently": "^9.1.0"

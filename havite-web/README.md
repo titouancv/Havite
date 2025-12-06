@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Havite Web
+
+The web application for Havite - an AI-powered tech news aggregation and summarization platform.
+
+## Tech Stack
+
+- **Framework**: [Next.js 16](https://nextjs.org) with App Router
+- **UI**: React 19, Tailwind CSS 4
+- **Database**: [Supabase](https://supabase.com) (PostgreSQL)
+- **AI**: [Vercel AI SDK](https://sdk.vercel.ai) with Mistral AI & Perplexity
+- **Icons**: Lucide React
+- **Validation**: Zod
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- npm 10+
+- Supabase project
+
+### Installation
+
+```bash
+npm install
+```
+
+### Environment Variables
+
+Create a `.env.local` file with the following variables:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL="your-supabase-url"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
+MISTRAL_API_KEY="your-mistral-api-key"
+PERPLEXITY_API_KEY="your-perplexity-api-key"
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+havite-web/
+├── api/              # API utilities and bot integrations
+│   ├── bots/         # AI bot implementations (Mistral, Perplexity, Twitter)
+│   └── cron/         # Scheduled tasks
+├── app/              # Next.js App Router pages
+│   ├── [slug]/       # Dynamic recap pages
+│   ├── about/        # About page
+│   ├── login/        # Authentication
+│   └── profil/       # User profile
+├── components/       # React components
+│   └── ui/           # Reusable UI components
+├── lib/              # Utilities and hooks
+│   ├── contexts/     # React contexts (Auth, Modal)
+│   └── hooks/        # Custom hooks
+└── public/           # Static assets
+```
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+- 📰 AI-generated tech news recaps
+- 🔐 User authentication via Supabase
+- 💬 Comments system
+- 👍 Voting on recaps
+- 🔗 Source attribution and linking
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Deploy on [Vercel](https://vercel.com) for the best experience with Next.js:
 
-## Deploy on Vercel
+```bash
+npm run build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
