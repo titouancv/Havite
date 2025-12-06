@@ -7,6 +7,7 @@
 	"name": "bots",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-12-05",
+	"compatibility_flags": ["nodejs_compat"],
 	"observability": {
 		"enabled": true,
 	},
@@ -21,14 +22,6 @@
 	 * databases, object storage, AI inference, real-time communication and more.
 	 * https://developers.cloudflare.com/workers/runtime-apis/bindings/
 	 */
-	// "vars": {
-	// 	"SUPABASE_URL": "example.com",
-	// 	"SUPABASE_ANON_KEY": "example_user",
-	// 	"SERVICE_X_DATA": "aaaa",
-	// 	"API_HOST": "example.com",
-	// 	"API_ACCOUNT_ID": "example_user",
-	// 	"SERVICE_X_DATA": "aaaa",
-	// },
 	/**
 	 * Note: Use secrets to store sensitive data.
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
@@ -44,6 +37,6 @@
 	 */
 	// "services": [{ "binding": "MY_SERVICE", "service": "my-service" }]
 	"triggers": {
-		"crons": ["* * * * *"],
+		"crons": ["*/49 * * * *"],
 	},
 }
