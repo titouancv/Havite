@@ -76,7 +76,7 @@ export function buildPerplexityUserPrompt(lastRecaps: { title: string; category:
 		categoryHint = `\n### CATEGORY GUIDANCE\nNo previous coverage. Search ALL categories (${allCategories.join(', ')}) and select the most important story.\n`;
 	}
 
-	return `
+	return `${context}${categoryHint}
 ### MISSION
 1. **Search broadly** across ALL authorized French media for articles from the last day.
 2. **Explore ALL categories**: news, science, politics, culture, sports, economy, international.
