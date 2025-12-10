@@ -1,10 +1,16 @@
 import { createSupabaseClient } from '../api/supabase';
-import { callPerplexity } from '../api/perplexity';
+import { perplexityResult } from '../api/perplexity';
 import { callMistral } from '../api/mistral';
 import { runTwitterBot } from '../api/twitter';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { PERPLEXITY_SYSTEM_PROMPT, buildPerplexityUserPrompt, MISTRAL_SYSTEM_PROMPT, buildMistralUserPrompt } from '../utils/prompts';
-import { PerplexityResult, PERPLEXITY_JSON_SCHEMA, TweetResult, Article, Source, NewsBotResult } from '../utils/types';
+import { PERPLEXITY_JSON_SCHEMA, TweetResult, Article, Source, NewsBotResult, Category } from '../utils/types';
+
+export interface LastRecapInfo {
+	title: string;
+	category: Category;
+}
+
 export interface Env {
 	SUPABASE_URL: string;
 	SUPABASE_ANON_KEY: string;
@@ -20,27 +26,27 @@ export async function runNewsBot(env: Env): Promise<NewsBotResult> {
 	console.log('Running News Bot...');
 	const supabase = createSupabaseClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
 
-	const lastSummary = await getLastRecapSummary(supabase);
-	console.log('Last recap summary:', lastSummary);
+	const lastRecaps = await getLastRecaps(supabase);
+	console.log('Last recaps:', lastRecaps);
 
-	const result = await createNewRecap(supabase, env, lastSummary);
+	const result = await createNewRecap(supabase, env, lastRecaps);
 	console.log('Result:', result);
 
 	return result;
 }
 
-export async function getLastRecapSummary(supabase: SupabaseClient): Promise<string | undefined> {
-	const { data, error } = await supabase.from('article').select('summary').order('created_at', { ascending: false }).limit(1).single();
+export async function getLastRecaps(supabase: SupabaseClient): Promise<LastRecapInfo[]> {
+	const { data, error } = await supabase.from('article').select('title, category').order('created_at', { ascending: false }).limit(5);
 
-	if (error || !data) {
-		return undefined;
+	if (error || !data || data.length === 0) {
+		return [];
 	}
 
-	return data.summary;
+	return data.map((item) => ({ title: item.title, category: item.category as Category }));
 }
 
-export async function createNewRecap(supabase: SupabaseClient, env: Env, lastSummary?: string): Promise<NewsBotResult> {
-	const perplexityData = await fetchArticleFromPerplexity(env.PERPLEXITY_API_KEY, lastSummary);
+export async function createNewRecap(supabase: SupabaseClient, env: Env, lastRecaps: LastRecapInfo[]): Promise<NewsBotResult> {
+	const perplexityData = await fetchArticleFromPerplexity(env, lastRecaps);
 
 	if (perplexityData.type === 'fallback') {
 		return { success: false, reason: perplexityData.reason };
@@ -54,10 +60,10 @@ export async function createNewRecap(supabase: SupabaseClient, env: Env, lastSum
 		const articleId = await insertArticle(supabase, article, summary);
 		const recapId = await insertRecap(supabase, articleId);
 
-		if (shouldPostToTwitter()) {
-			console.log('Posting summary to Twitter...');
-			await runTwitterBot(summary, recapId, env);
-		}
+		// if (shouldPostToTwitter()) {
+		// 	console.log('Posting summary to Twitter...');
+		// 	await runTwitterBot(summary, recapId, env);
+		// }
 
 		await insertSources(supabase, sources, recapId);
 
@@ -69,13 +75,10 @@ export async function createNewRecap(supabase: SupabaseClient, env: Env, lastSum
 	}
 }
 
-async function fetchArticleFromPerplexity(apiKey: string, lastSummary?: string) {
+async function fetchArticleFromPerplexity(env: Env, lastRecaps: LastRecapInfo[]) {
 	console.log('Fetching article from Perplexity...');
-	const result = await callPerplexity<PerplexityResult>(apiKey, {
-		systemPrompt: PERPLEXITY_SYSTEM_PROMPT,
-		userPrompt: buildPerplexityUserPrompt(lastSummary),
-		jsonSchema: PERPLEXITY_JSON_SCHEMA,
-	});
+
+	const result = await perplexityResult(env, lastRecaps);
 	console.log('Perplexity data received:', result);
 	return result;
 }

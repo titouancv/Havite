@@ -1,67 +1,102 @@
-const PERPLEXITY_API_URL = "https://api.perplexity.ai/chat/completions";
+import { generateObject } from 'ai';
+import { z } from 'zod';
+import { createPerplexity } from '@ai-sdk/perplexity';
+import { PerplexityResult } from '../utils/types';
+import { PERPLEXITY_SYSTEM_PROMPT, buildPerplexityUserPrompt } from '../utils/prompts';
 
-interface PerplexityConfig {
-  systemPrompt: string;
-  userPrompt: string;
-  jsonSchema: object;
+// Cloudflare Worker version: no process.env, needs env.PERPLEXITY_API_KEY
+export interface Env {
+	PERPLEXITY_API_KEY: string;
 }
 
-interface PerplexityResponse {
-  id: string;
-  model: string;
-  choices: {
-    index: number;
-    message: {
-      role: string;
-      content: string;
+// ---------- SCHEMAS ----------
+const SourceSchema = z.object({
+	url: z.string().url().describe('The direct URL to the source article, should match the domain of the mediaName'),
+	mediaName: z
+		.enum([
+			'lemonde',
+			'lefigaro',
+			'leparisien',
+			'vingtminutes',
+			'bfmtv',
+			'liberation',
+			'ouestfrance',
+			'lepoint',
+			'lenouvelobs',
+			'mediapart',
+		])
+		.describe('The name of the media outlet'),
+});
+
+const ArticleSchema = z.object({
+	title: z.string().describe('The title of the article'),
+	content: z.string().describe('A detailed summary of the article (approx 15 sentences)'),
+	imageUrl: z.string().url().describe('The URL of the main image for the article'),
+	category: z
+		.enum(['news', 'science', 'politics', 'culture', 'sports', 'economy', 'international'])
+		.describe('The category of the news item'),
+	readingTime: z.number().int().describe('Estimated reading time in minutes'),
+	importanceScore: z.number().min(1).max(10).describe('A score from 1 to 10 indicating the importance of the news'),
+});
+
+const ArticleWithSourcesSchema = z.object({
+	article: ArticleSchema.describe('The main article content'),
+	sources: z.array(SourceSchema).describe('List of sources used for this article'),
+});
+
+const FallbackSchema = z.object({
+	type: z.literal('fallback').describe('Type identifier for fallback result'),
+	reason: z.string().describe('Reason why no article was found'),
+});
+
+export const ResultSchema = z.union([ArticleWithSourcesSchema, FallbackSchema]);
+export type Result = z.infer<typeof ResultSchema>;
+
+// ---------- MAIN FUNCTION (WORKER SAFE) ----------
+export async function perplexityResult(env: Env, lastRecaps: { title: string; category: string }[]): Promise<PerplexityResult> {
+	const perplexity = createPerplexity({
+		apiKey: env.PERPLEXITY_API_KEY,
+	});
+
+	const result = await generateObject({
+		model: perplexity('sonar'),
+		schema: ResultSchema,
+		system: PERPLEXITY_SYSTEM_PROMPT,
+		prompt: buildPerplexityUserPrompt(lastRecaps),
+		providerOptions: {
+			perplexity: {
+				return_images: true,
+			},
+		},
+	});
+
+	if (!result?.object) {
+		return { type: 'fallback', reason: 'Structure generation failed' };
+	}
+
+	if ('type' in result.object && result.object.type === 'fallback') {
+		return result.object;
+	}
+
+	const { article, sources } = result.object as any;
+
+	// Cloudflare supports console.log
+	console.log('Perplexity metadata', result.providerMetadata);
+
+	if (article && result.providerMetadata?.perplexity?.images) {
+    const metadata = result.providerMetadata as {
+      perplexity: {
+        usage: { citationTokens: number; numSearchQueries: number };
+        images: {
+          imageUrl: string;
+          originUrl: string;
+          height: number;
+          width: number;
+        }[];
+      };
     };
-    finish_reason: string;
-  }[];
-  usage: {
-    prompt_tokens: number;
-    completion_tokens: number;
-    total_tokens: number;
-  };
-}
+    article.imageUrl = metadata.perplexity.images[0].imageUrl;
+	}
 
-export async function callPerplexity<T>(
-  apiKey: string,
-  config: PerplexityConfig
-): Promise<T> {
-  const response = await fetch(PERPLEXITY_API_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "sonar",
-      messages: [
-        { role: "system", content: config.systemPrompt },
-        { role: "user", content: config.userPrompt },
-      ],
-      search_recency_filter: "day",
-      return_images: true,
-      response_format: {
-        type: "json_schema",
-        json_schema: {
-          schema: config.jsonSchema,
-        },
-      },
-    }),
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Perplexity API error: ${response.status} - ${errorText}`);
-  }
-
-  const data = (await response.json()) as PerplexityResponse;
-
-  const content = data.choices?.[0]?.message?.content;
-  if (!content) {
-    throw new Error("No response from Perplexity API");
-  }
-
-  return JSON.parse(content) as T;
+	return { type: 'article', article, sources };
 }

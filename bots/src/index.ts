@@ -15,7 +15,6 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-import { runTwitterBot } from './api/twitter';
 import { runNewsBot } from './bots/newsBot';
 import type { Env } from './bots/newsBot';
 
